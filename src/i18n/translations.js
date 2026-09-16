@@ -52,6 +52,7 @@ export const translations = {
       resumeJson: "JSON do currículo",
       template: "Template",
       palette: "Esquema de cores",
+      editColor: "Alterar cor",
       palettes: {
         ocean: "Oceano (padrão)",
         forest: "Floresta",
@@ -174,6 +175,7 @@ export const translations = {
       resumeJson: "Resume JSON",
       template: "Template",
       palette: "Color scheme",
+      editColor: "Edit color",
       palettes: {
         ocean: "Ocean (default)",
         forest: "Forest",
@@ -297,6 +299,7 @@ export const translations = {
       resumeJson: "JSON del currículum",
       template: "Plantilla",
       palette: "Esquema de colores",
+      editColor: "Cambiar color",
       palettes: {
         ocean: "Océano (predeterminado)",
         forest: "Bosque",

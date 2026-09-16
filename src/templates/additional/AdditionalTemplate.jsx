@@ -17,6 +17,7 @@ const AdditionalTemplate = ({
   hiddenSections = [],
   customSections = [],
   visualSettings = {},
+  paletteColors = [],
 }) => {
   const candidate = resume?.candidate || {};
   const contact = candidate.contact || {};
@@ -176,6 +177,11 @@ const AdditionalTemplate = ({
         "--resume-font-scale": visualSettings.fontScale || 1,
         "--resume-spacing-scale": visualSettings.spacing || 1,
         "--resume-margin-scale": visualSettings.margin || 1,
+        "--resume-dark": paletteColors[0],
+        "--resume-accent": paletteColors[1],
+        "--resume-accent-soft": paletteColors[2],
+        "--resume-ink": paletteColors[3],
+        "--resume-text": paletteColors[4],
       }}
     >
       <header className="additional-header">

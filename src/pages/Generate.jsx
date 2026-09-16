@@ -217,6 +217,11 @@ const Generate = ({ t }) => {
   const [palette, setPalette] = useState(() =>
     getStoredPreference(PALETTE_KEY, "ocean", paletteValues),
   );
+  const [paletteColors, setPaletteColors] = useState(
+    () =>
+      paletteOptions.find((option) => option.value === palette)?.colors ||
+      paletteOptions[0].colors,
+  );
   const [dateFormat, setDateFormat] = useState(() =>
     getStoredPreference(DATE_FORMAT_KEY, "month-year", dateFormatValues),
   );
@@ -342,6 +347,10 @@ const Generate = ({ t }) => {
 
   const resetVisualEditor = () => {
     setVisualSettings(defaultVisualSettings);
+    setPaletteColors(
+      paletteOptions.find((option) => option.value === palette)?.colors ||
+        paletteOptions[0].colors,
+    );
     setSectionSettings({
       sectionOrder: defaultSectionOrder,
       hiddenSections: [],
@@ -405,7 +414,11 @@ const Generate = ({ t }) => {
             value={palette}
             onChange={(event) => {
               const nextPalette = event.target.value;
+              const nextPaletteOption = paletteOptions.find(
+                (option) => option.value === nextPalette,
+              );
               setPalette(nextPalette);
+              setPaletteColors(nextPaletteOption.colors);
               setStoredPreference(PALETTE_KEY, nextPalette);
             }}
           >
@@ -415,12 +428,26 @@ const Generate = ({ t }) => {
               </option>
             ))}
           </select>
-          <div className="palette-swatches" aria-hidden="true">
-            {paletteOptions
-              .find((option) => option.value === palette)
-              .colors.map((color) => (
-                <span key={color} style={{ backgroundColor: color }} />
-              ))}
+          <div className="palette-swatches">
+            {paletteColors.map((color, index) => (
+              <label
+                className="palette-color-control"
+                key={`${palette}-${index}`}
+              >
+                <input
+                  type="color"
+                  value={color}
+                  title={t.generate.editColor}
+                  aria-label={`${t.generate.editColor} ${index + 1}`}
+                  onChange={(event) => {
+                    const nextColors = [...paletteColors];
+                    nextColors[index] = event.target.value;
+                    setPaletteColors(nextColors);
+                  }}
+                />
+                <span style={{ backgroundColor: color }} />
+              </label>
+            ))}
           </div>
         </div>
 
@@ -648,6 +675,7 @@ const Generate = ({ t }) => {
               resume={resume}
               dateFormat={dateFormat}
               visualSettings={visualSettings}
+              paletteColors={paletteColors}
               sectionOrder={sectionOrder}
               hiddenSections={hiddenSections}
               customSections={customSections}
