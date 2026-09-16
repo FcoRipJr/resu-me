@@ -269,6 +269,19 @@ textarea {
   margin-top: 1rem;
 }
 
+.palette-swatches {
+  display: flex;
+  gap: 0.35rem;
+  margin-top: 0.55rem;
+}
+
+.palette-swatches span {
+  width: 1.35rem;
+  height: 1.35rem;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 50%;
+}
+
 .language-switcher {
   min-width: 160px;
 }
@@ -290,18 +303,26 @@ textarea {
 }
 
 .resume-template {
+  --resume-dark: #0f172a;
+  --resume-accent: #1d4ed8;
+  --resume-accent-soft: #dbeafe;
+  --resume-ink: #111827;
+  --resume-text: #374151;
+  --resume-muted: #475569;
+  --resume-surface: #f8fafc;
+  --resume-border: #e5e7eb;
   width: 100%;
   min-height: 280px;
   padding: 1.5rem;
   background: white;
-  color: #111827;
+  color: var(--resume-ink);
   border-radius: 16px;
   border: 1px solid #e5e7eb;
 }
 
 .resume-header {
   margin-bottom: 1.25rem;
-  border-bottom: 2px solid #dbeafe;
+  border-bottom: 2px solid var(--resume-accent-soft);
   padding-bottom: 0.8rem;
 }
 
@@ -316,7 +337,7 @@ textarea {
 .executive-header p,
 .role {
   margin: 0;
-  color: #475569;
+  color: var(--resume-muted);
   font-weight: 600;
 }
 
@@ -328,7 +349,7 @@ textarea {
 .resume-block h3,
 .sidebar-block h3 {
   margin: 0 0 0.65rem;
-  color: #1d4ed8;
+  color: var(--resume-accent);
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -342,7 +363,7 @@ textarea {
 .sidebar ul,
 .resume-template ul {
   margin: 0;
-  color: #374151;
+  color: var(--resume-text);
 }
 
 .resume-template ul,
@@ -362,8 +383,8 @@ textarea {
 .chip {
   padding: 0.35rem 0.7rem;
   border-radius: 999px;
-  background: #dbeafe;
-  color: #1d4ed8;
+  background: var(--resume-accent-soft);
+  color: var(--resume-accent);
   font-size: 0.82rem;
   font-weight: 600;
 }
@@ -371,7 +392,7 @@ textarea {
 .experience-item {
   margin-bottom: 0.9rem;
   padding-bottom: 0.7rem;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--resume-border);
 }
 
 .experience-item:last-child {
@@ -392,19 +413,19 @@ textarea {
 }
 
 .experience-header span {
-  color: #475569;
+  color: var(--resume-muted);
 }
 
 .experience-company {
   margin: 0.1rem 0 0.2rem;
-  color: #475569;
+  color: var(--resume-muted);
   font-size: 0.92rem;
 }
 
 .experience-period {
   margin: 0.2rem 0 0.5rem;
   font-size: 0.8rem;
-  color: #64748b;
+  color: var(--resume-muted);
 }
 
 .modern-template {
@@ -416,7 +437,7 @@ textarea {
 }
 
 .sidebar {
-  background: #0f172a;
+  background: var(--resume-dark);
   color: white;
   padding: 1.5rem 1.25rem;
 }
@@ -437,7 +458,7 @@ textarea {
 }
 
 .executive-template {
-  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  background: linear-gradient(180deg, var(--resume-surface) 0%, #ffffff 100%);
 }
 
 .executive-header {
@@ -446,7 +467,7 @@ textarea {
   gap: 1rem;
   align-items: flex-end;
   padding-bottom: 0.9rem;
-  border-bottom: 2px solid #dbeafe;
+  border-bottom: 2px solid var(--resume-accent-soft);
   margin-bottom: 1rem;
 }
 
@@ -456,7 +477,227 @@ textarea {
   gap: 0.2rem;
   text-align: right;
   font-size: 0.8rem;
-  color: #475569;
+  color: var(--resume-muted);
+}
+
+.palette-forest .resume-template {
+  --resume-dark: #17352f;
+  --resume-accent: #18794e;
+  --resume-accent-soft: #d8f3e5;
+  --resume-ink: #17221f;
+  --resume-text: #3d5149;
+  --resume-muted: #567168;
+  --resume-surface: #f2faf5;
+  --resume-border: #d7e8de;
+}
+
+.palette-terracotta .resume-template {
+  --resume-dark: #4a2420;
+  --resume-accent: #b4533c;
+  --resume-accent-soft: #f8dfd5;
+  --resume-ink: #2b211f;
+  --resume-text: #59433d;
+  --resume-muted: #765c54;
+  --resume-surface: #fff8f5;
+  --resume-border: #ead8d1;
+}
+
+.palette-violet .resume-template {
+  --resume-dark: #2e2450;
+  --resume-accent: #6941c6;
+  --resume-accent-soft: #e9ddff;
+  --resume-ink: #211c32;
+  --resume-text: #514b62;
+  --resume-muted: #6d6680;
+  --resume-surface: #faf8ff;
+  --resume-border: #e5def3;
+}
+
+.palette-slate .resume-template {
+  --resume-dark: #263746;
+  --resume-accent: #38658a;
+  --resume-accent-soft: #dceaf4;
+  --resume-ink: #1f2933;
+  --resume-text: #465463;
+  --resume-muted: #647484;
+  --resume-surface: #f5f9fc;
+  --resume-border: #dce4ea;
+}
+
+.palette-mustard .resume-template {
+  --resume-dark: #3f3520;
+  --resume-accent: #a66a00;
+  --resume-accent-soft: #f6e8b1;
+  --resume-ink: #29251c;
+  --resume-text: #5b5548;
+  --resume-muted: #756c59;
+  --resume-surface: #fffcf2;
+  --resume-border: #eee3c2;
+}
+
+.palette-ruby .resume-template {
+  --resume-dark: #451a24;
+  --resume-accent: #b4233f;
+  --resume-accent-soft: #fbd5dd;
+  --resume-ink: #2b1720;
+  --resume-text: #5a3b43;
+  --resume-muted: #765762;
+  --resume-surface: #fff7f8;
+  --resume-border: #efd8de;
+}
+
+.palette-ember .resume-template {
+  --resume-dark: #472617;
+  --resume-accent: #c2410c;
+  --resume-accent-soft: #ffdfc7;
+  --resume-ink: #2d1b13;
+  --resume-text: #62473b;
+  --resume-muted: #7d6254;
+  --resume-surface: #fff9f5;
+  --resume-border: #f0ddd2;
+}
+
+.palette-coral .resume-template {
+  --resume-dark: #49302d;
+  --resume-accent: #d05d55;
+  --resume-accent-soft: #fbdad5;
+  --resume-ink: #2d2423;
+  --resume-text: #654c49;
+  --resume-muted: #806764;
+  --resume-surface: #fff8f7;
+  --resume-border: #eedbd8;
+}
+
+.palette-rose .resume-template {
+  --resume-dark: #4b253b;
+  --resume-accent: #c2467a;
+  --resume-accent-soft: #f8d8e7;
+  --resume-ink: #2e1d27;
+  --resume-text: #604552;
+  --resume-muted: #7d6170;
+  --resume-surface: #fff8fb;
+  --resume-border: #efdbe5;
+}
+
+.palette-plum .resume-template {
+  --resume-dark: #38243d;
+  --resume-accent: #8b4c9f;
+  --resume-accent-soft: #ead8ef;
+  --resume-ink: #251b29;
+  --resume-text: #55465a;
+  --resume-muted: #706077;
+  --resume-surface: #fcf9fd;
+  --resume-border: #e8ddea;
+}
+
+.palette-indigo .resume-template {
+  --resume-dark: #202a52;
+  --resume-accent: #4f46a5;
+  --resume-accent-soft: #dfe1ff;
+  --resume-ink: #1b2038;
+  --resume-text: #434a68;
+  --resume-muted: #626a8b;
+  --resume-surface: #f8f9ff;
+  --resume-border: #dfe2f1;
+}
+
+.palette-cobalt .resume-template {
+  --resume-dark: #102f4f;
+  --resume-accent: #1671c5;
+  --resume-accent-soft: #d4ebff;
+  --resume-ink: #142333;
+  --resume-text: #3e566b;
+  --resume-muted: #60778a;
+  --resume-surface: #f5faff;
+  --resume-border: #d8e5ef;
+}
+
+.palette-teal .resume-template {
+  --resume-dark: #123c42;
+  --resume-accent: #0f8b8d;
+  --resume-accent-soft: #d0f0ee;
+  --resume-ink: #172c30;
+  --resume-text: #3e5d60;
+  --resume-muted: #5e7b7d;
+  --resume-surface: #f4fbfb;
+  --resume-border: #d6e8e8;
+}
+
+.palette-lagoon .resume-template {
+  --resume-dark: #123b4a;
+  --resume-accent: #168aad;
+  --resume-accent-soft: #d4f1f9;
+  --resume-ink: #172a35;
+  --resume-text: #42616b;
+  --resume-muted: #64818a;
+  --resume-surface: #f3fbfd;
+  --resume-border: #d7e9ee;
+}
+
+.palette-mint .resume-template {
+  --resume-dark: #1d403b;
+  --resume-accent: #299d83;
+  --resume-accent-soft: #d5f4e9;
+  --resume-ink: #182b28;
+  --resume-text: #46645c;
+  --resume-muted: #66827a;
+  --resume-surface: #f5fcf9;
+  --resume-border: #d9ebe3;
+}
+
+.palette-cyan .resume-template {
+  --resume-dark: #16404c;
+  --resume-accent: #0891b2;
+  --resume-accent-soft: #cff5fb;
+  --resume-ink: #172c34;
+  --resume-text: #42616a;
+  --resume-muted: #63808a;
+  --resume-surface: #f3fcfe;
+  --resume-border: #d6e9ed;
+}
+
+.palette-amber .resume-template {
+  --resume-dark: #4a3515;
+  --resume-accent: #d18b00;
+  --resume-accent-soft: #ffedb5;
+  --resume-ink: #302616;
+  --resume-text: #66563a;
+  --resume-muted: #806f4b;
+  --resume-surface: #fffdf5;
+  --resume-border: #efe4c4;
+}
+
+.palette-olive .resume-template {
+  --resume-dark: #35401d;
+  --resume-accent: #718c20;
+  --resume-accent-soft: #e8efc4;
+  --resume-ink: #252b1b;
+  --resume-text: #566044;
+  --resume-muted: #717b5b;
+  --resume-surface: #fbfcf3;
+  --resume-border: #e4e8d0;
+}
+
+.palette-coffee .resume-template {
+  --resume-dark: #3e2b25;
+  --resume-accent: #976044;
+  --resume-accent-soft: #f0ddd0;
+  --resume-ink: #29201c;
+  --resume-text: #5d4940;
+  --resume-muted: #786358;
+  --resume-surface: #fdfaf8;
+  --resume-border: #eaded7;
+}
+
+.palette-graphite .resume-template {
+  --resume-dark: #20252b;
+  --resume-accent: #59636e;
+  --resume-accent-soft: #e1e6eb;
+  --resume-ink: #181b20;
+  --resume-text: #454d56;
+  --resume-muted: #68727d;
+  --resume-surface: #f8f9fa;
+  --resume-border: #dfe3e7;
 }
 
 @media (max-width: 900px) {
