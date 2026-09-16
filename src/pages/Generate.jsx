@@ -1,14 +1,21 @@
 import { useMemo, useState } from "react";
-import { Copy, Eye, Trash2 } from "lucide-react";
+import { Copy, Eye, Plus, RotateCcw, Trash2, X } from "lucide-react";
 import AtsTemplate from "../templates/ats/AtsTemplate";
 import ModernTemplate from "../templates/modern/ModernTemplate";
 import ExecutiveTemplate from "../templates/executive/ExecutiveTemplate";
-import { getStoredPreference, setStoredPreference } from "../utils/storage";
+import {
+  getStoredJsonPreference,
+  getStoredPreference,
+  setStoredJsonPreference,
+  setStoredPreference,
+} from "../utils/storage";
 import { validateOptimizedResumeJson } from "../utils/validation";
 
 const TEMPLATE_KEY = "resu-me.resume-template";
 const PALETTE_KEY = "resu-me.resume-palette";
 const DATE_FORMAT_KEY = "resu-me.date-format";
+const VISUAL_SETTINGS_KEY = "resu-me.visual-settings";
+const SECTION_SETTINGS_KEY = "resu-me.section-settings";
 
 const templateMap = {
   ats: AtsTemplate,
@@ -106,6 +113,15 @@ const paletteOptions = [
 const templateValues = Object.keys(templateMap);
 const paletteValues = paletteOptions.map((option) => option.value);
 const dateFormatValues = ["month-year", "year", "full"];
+const defaultSectionOrder = [
+  "objective",
+  "summary",
+  "skills",
+  "experience",
+  "education",
+  "projects",
+];
+const defaultVisualSettings = { fontScale: 1, spacing: 1, margin: 1 };
 
 const defaultResume = {
   language: "en",
@@ -187,7 +203,29 @@ const Generate = ({ t }) => {
   const [dateFormat, setDateFormat] = useState(() =>
     getStoredPreference(DATE_FORMAT_KEY, "month-year", dateFormatValues),
   );
+  const [visualSettings, setVisualSettings] = useState(() =>
+    getStoredJsonPreference(VISUAL_SETTINGS_KEY, defaultVisualSettings),
+  );
+  const [sectionSettings, setSectionSettings] = useState(() =>
+    getStoredJsonPreference(SECTION_SETTINGS_KEY, {
+      sectionOrder: defaultSectionOrder,
+      hiddenSections: [],
+      customSections: [],
+    }),
+  );
+  const [customSectionTitle, setCustomSectionTitle] = useState("");
+  const [customSectionContent, setCustomSectionContent] = useState("");
   const [error, setError] = useState("");
+
+  const { sectionOrder, hiddenSections, customSections } = sectionSettings;
+
+  const updateSectionSettings = (updates) => {
+    setSectionSettings((current) => {
+      const next = { ...current, ...updates };
+      setStoredJsonPreference(SECTION_SETTINGS_KEY, next);
+      return next;
+    });
+  };
 
   const SelectedTemplate = templateMap[template];
 
@@ -237,6 +275,78 @@ const Generate = ({ t }) => {
 
   const resume = parsedResume.resume;
 
+  const updateVisualSetting = (key, value) => {
+    setVisualSettings((current) => {
+      const next = { ...current, [key]: Number(value) };
+      setStoredJsonPreference(VISUAL_SETTINGS_KEY, next);
+      return next;
+    });
+  };
+
+  const toggleSection = (sectionId) => {
+    const nextHiddenSections = hiddenSections.includes(sectionId)
+      ? hiddenSections.filter((id) => id !== sectionId)
+      : [...hiddenSections, sectionId];
+    updateSectionSettings({ hiddenSections: nextHiddenSections });
+  };
+
+  const moveSection = (sectionId, direction) => {
+    const index = sectionOrder.indexOf(sectionId);
+    const nextIndex = index + direction;
+    if (index < 0 || nextIndex < 0 || nextIndex >= sectionOrder.length) return;
+    const next = [...sectionOrder];
+    [next[index], next[nextIndex]] = [next[nextIndex], next[index]];
+    updateSectionSettings({ sectionOrder: next });
+  };
+
+  const addCustomSection = () => {
+    const title = customSectionTitle.trim();
+    const content = customSectionContent.trim();
+    if (!title || !content) return;
+    const id = `custom-${Date.now()}`;
+    const nextCustomSections = [...customSections, { id, title, content }];
+    updateSectionSettings({
+      customSections: nextCustomSections,
+      sectionOrder: [...sectionOrder, id],
+    });
+    setCustomSectionTitle("");
+    setCustomSectionContent("");
+  };
+
+  const removeCustomSection = (sectionId) => {
+    updateSectionSettings({
+      customSections: customSections.filter(
+        (section) => section.id !== sectionId,
+      ),
+      sectionOrder: sectionOrder.filter((id) => id !== sectionId),
+      hiddenSections: hiddenSections.filter((id) => id !== sectionId),
+    });
+  };
+
+  const resetVisualEditor = () => {
+    setVisualSettings(defaultVisualSettings);
+    setSectionSettings({
+      sectionOrder: defaultSectionOrder,
+      hiddenSections: [],
+      customSections: [],
+    });
+    setStoredJsonPreference(VISUAL_SETTINGS_KEY, defaultVisualSettings);
+    setStoredJsonPreference(SECTION_SETTINGS_KEY, {
+      sectionOrder: defaultSectionOrder,
+      hiddenSections: [],
+      customSections: [],
+    });
+  };
+
+  const resetSectionOrder = () => {
+    updateSectionSettings({
+      sectionOrder: [
+        ...defaultSectionOrder,
+        ...customSections.map((section) => section.id),
+      ],
+    });
+  };
+
   return (
     <section className="page-grid generate-page">
       <div className="panel">
@@ -256,25 +366,6 @@ const Generate = ({ t }) => {
             <option value="ats">{t.generate.ats}</option>
             <option value="modern">{t.generate.modern}</option>
             <option value="executive">{t.generate.executive}</option>
-          </select>
-        </div>
-
-        <div className="field-group">
-          <label htmlFor="date-format-select">{t.generate.dateFormat}</label>
-          <select
-            id="date-format-select"
-            value={dateFormat}
-            onChange={(event) => {
-              const nextFormat = event.target.value;
-              setDateFormat(nextFormat);
-              setStoredPreference(DATE_FORMAT_KEY, nextFormat);
-            }}
-          >
-            <option value="month-year">
-              {t.generate.dateFormats.monthYear}
-            </option>
-            <option value="year">{t.generate.dateFormats.year}</option>
-            <option value="full">{t.generate.dateFormats.full}</option>
           </select>
         </div>
 
@@ -303,6 +394,154 @@ const Generate = ({ t }) => {
               ))}
           </div>
         </div>
+
+        <div className="field-group">
+          <label htmlFor="date-format-select">{t.generate.dateFormat}</label>
+          <select
+            id="date-format-select"
+            value={dateFormat}
+            onChange={(event) => {
+              const nextFormat = event.target.value;
+              setDateFormat(nextFormat);
+              setStoredPreference(DATE_FORMAT_KEY, nextFormat);
+            }}
+          >
+            <option value="month-year">
+              {t.generate.dateFormats.monthYear}
+            </option>
+            <option value="year">{t.generate.dateFormats.year}</option>
+            <option value="full">{t.generate.dateFormats.full}</option>
+          </select>
+        </div>
+
+        <fieldset className="editor-fieldset">
+          <legend>{t.generate.visualEditor}</legend>
+          <label htmlFor="font-scale">{t.generate.fontSize}</label>
+          <input
+            id="font-scale"
+            type="range"
+            min="0.7"
+            max="1.5"
+            step="0.05"
+            value={visualSettings.fontScale}
+            onChange={(event) =>
+              updateVisualSetting("fontScale", event.target.value)
+            }
+          />
+          <label htmlFor="spacing-scale">{t.generate.spacing}</label>
+          <input
+            id="spacing-scale"
+            type="range"
+            min="0.5"
+            max="2"
+            step="0.1"
+            value={visualSettings.spacing}
+            onChange={(event) =>
+              updateVisualSetting("spacing", event.target.value)
+            }
+          />
+          <label htmlFor="margin-scale">{t.generate.margin}</label>
+          <input
+            id="margin-scale"
+            type="range"
+            min="0.5"
+            max="1.8"
+            step="0.1"
+            value={visualSettings.margin}
+            onChange={(event) =>
+              updateVisualSetting("margin", event.target.value)
+            }
+          />
+          <button
+            type="button"
+            className="secondary reset-editor-button"
+            onClick={resetVisualEditor}
+          >
+            <RotateCcw aria-hidden="true" size={16} />
+            {t.generate.resetEditor}
+          </button>
+        </fieldset>
+
+        <fieldset className="editor-fieldset">
+          <legend>{t.generate.sectionEditor}</legend>
+          <div className="section-editor-list">
+            {sectionOrder.map((sectionId, index) => (
+              <div className="section-editor-row" key={sectionId}>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={!hiddenSections.includes(sectionId)}
+                    onChange={() => toggleSection(sectionId)}
+                  />
+                  {t.generate.sections[sectionId] ||
+                    customSections.find((section) => section.id === sectionId)
+                      ?.title}
+                </label>
+                <div className="section-move-actions">
+                  <button
+                    type="button"
+                    className="secondary icon-button"
+                    title={t.generate.moveUp}
+                    aria-label={t.generate.moveUp}
+                    disabled={index === 0}
+                    onClick={() => moveSection(sectionId, -1)}
+                  >
+                    ↑
+                  </button>
+                  <button
+                    type="button"
+                    className="secondary icon-button"
+                    title={t.generate.moveDown}
+                    aria-label={t.generate.moveDown}
+                    disabled={index === sectionOrder.length - 1}
+                    onClick={() => moveSection(sectionId, 1)}
+                  >
+                    ↓
+                  </button>
+                </div>
+                {sectionId.startsWith("custom-") && (
+                  <button
+                    type="button"
+                    className="secondary icon-button"
+                    title={t.generate.removeSection}
+                    aria-label={t.generate.removeSection}
+                    onClick={() => removeCustomSection(sectionId)}
+                  >
+                    <X aria-hidden="true" size={16} />
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+          <button
+            type="button"
+            className="secondary reset-editor-button"
+            onClick={resetSectionOrder}
+          >
+            <RotateCcw aria-hidden="true" size={16} />
+            {t.generate.resetSectionOrder}
+          </button>
+          <div className="custom-section-form">
+            <input
+              value={customSectionTitle}
+              onChange={(event) => setCustomSectionTitle(event.target.value)}
+              placeholder={t.generate.customSectionTitle}
+            />
+            <textarea
+              value={customSectionContent}
+              onChange={(event) => setCustomSectionContent(event.target.value)}
+              placeholder={t.generate.customSectionContent}
+              rows={3}
+            />
+            <button
+              type="button"
+              className="secondary"
+              onClick={addCustomSection}
+            >
+              <Plus aria-hidden="true" size={16} /> {t.generate.addSection}
+            </button>
+          </div>
+        </fieldset>
 
         <div className="field-group">
           <label htmlFor="resume-json">{t.generate.resumeJson}</label>
@@ -368,8 +607,22 @@ const Generate = ({ t }) => {
           </button>
         )}
         {resume ? (
-          <div className={`resume-palette palette-${palette}`}>
-            <SelectedTemplate resume={resume} dateFormat={dateFormat} />
+          <div
+            className={`resume-palette palette-${palette}`}
+            style={{
+              "--resume-font-scale": visualSettings.fontScale,
+              "--resume-spacing-scale": visualSettings.spacing,
+              "--resume-margin-scale": visualSettings.margin,
+            }}
+          >
+            <SelectedTemplate
+              resume={resume}
+              dateFormat={dateFormat}
+              visualSettings={visualSettings}
+              sectionOrder={sectionOrder}
+              hiddenSections={hiddenSections}
+              customSections={customSections}
+            />
           </div>
         ) : (
           <p>{t.generate.invalidResume}</p>

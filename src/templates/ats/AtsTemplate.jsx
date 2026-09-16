@@ -1,6 +1,6 @@
 import { formatPeriod } from "../../utils/date";
 
-const AtsTemplate = ({ resume, dateFormat = "month-year" }) => {
+const AtsTemplate = ({ resume, dateFormat = "month-year", sectionOrder, hiddenSections = [], customSections = [], visualSettings = {} }) => {
   const candidate = resume?.candidate || {};
   const contact = candidate.contact || {};
   const others = Array.isArray(contact.others)
@@ -8,9 +8,19 @@ const AtsTemplate = ({ resume, dateFormat = "month-year" }) => {
     : typeof contact.others === "string" && contact.others.trim()
       ? [contact.others.trim()]
       : [];
+  sectionOrder = sectionOrder || ["objective", "summary", "skills", "experience", "education"];
+  const sectionStyle = (id) => ({ order: sectionOrder.indexOf(id) + 1 });
+  const isVisible = (id) => !hiddenSections.includes(id);
 
   return (
-    <article className="resume-template ats-template">
+    <article
+      className="resume-template ats-template"
+      style={{
+        "--resume-font-scale": visualSettings.fontScale || 1,
+        "--resume-spacing-scale": visualSettings.spacing || 1,
+        "--resume-margin-scale": visualSettings.margin || 1,
+      }}
+    >
       <header className="resume-header">
         <h1>{candidate.name || "Candidate name"}</h1>
         <p>{candidate.title || "Desired role"}</p>
@@ -31,22 +41,22 @@ const AtsTemplate = ({ resume, dateFormat = "month-year" }) => {
         </ul>
       </section>
 
-      {resume.objective && (
-        <section className="resume-block">
+      {resume.objective && isVisible("objective") && (
+        <section className="resume-block resume-section" style={sectionStyle("objective")}>
           <h2>Objective</h2>
           <p>{resume.objective}</p>
         </section>
       )}
 
-      {resume.summary && (
-        <section className="resume-block">
+      {resume.summary && isVisible("summary") && (
+        <section className="resume-block resume-section" style={sectionStyle("summary")}>
           <h2>Summary</h2>
           <p>{resume.summary}</p>
         </section>
       )}
 
-      {resume.skills?.length > 0 && (
-        <section className="resume-block">
+      {resume.skills?.length > 0 && isVisible("skills") && (
+        <section className="resume-block resume-section" style={sectionStyle("skills")}>
           <h2>Skills</h2>
           <div className="chip-list">
             {resume.skills.map((skill) => (
@@ -58,8 +68,8 @@ const AtsTemplate = ({ resume, dateFormat = "month-year" }) => {
         </section>
       )}
 
-      {resume.experiences?.length > 0 && (
-        <section className="resume-block">
+      {resume.experiences?.length > 0 && isVisible("experience") && (
+        <section className="resume-block resume-section" style={sectionStyle("experience")}>
           <h2>Experience</h2>
           {resume.experiences.map((experience, index) => (
             <div
@@ -91,8 +101,8 @@ const AtsTemplate = ({ resume, dateFormat = "month-year" }) => {
         </section>
       )}
 
-      {resume.education?.length > 0 && (
-        <section className="resume-block">
+      {resume.education?.length > 0 && isVisible("education") && (
+        <section className="resume-block resume-section" style={sectionStyle("education")}>
           <h2>Education</h2>
           {resume.education.map((item, index) => (
             <div key={`${item.institution}-${index}`}>
@@ -110,6 +120,21 @@ const AtsTemplate = ({ resume, dateFormat = "month-year" }) => {
           ))}
         </section>
       )}
+
+      {resume.projects?.length > 0 && isVisible("projects") && (
+        <section className="resume-block resume-section" style={sectionStyle("projects")}>
+          <h2>Projects</h2>
+          {resume.projects.map((project, index) => (
+            <div key={`${project.name}-${index}`}><strong>{project.name}</strong><p>{project.description}</p></div>
+          ))}
+        </section>
+      )}
+
+      {customSections.map((section) => !hiddenSections.includes(section.id) && (
+        <section className="resume-block resume-section" style={sectionStyle(section.id)} key={section.id}>
+          <h2>{section.title}</h2><p>{section.content}</p>
+        </section>
+      ))}
     </article>
   );
 };

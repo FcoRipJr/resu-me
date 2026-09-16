@@ -68,7 +68,10 @@
 
   .resume-template.modern-template .main-column {
     background: var(--resume-surface);
-    padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+    padding: calc(1.25rem * var(--resume-margin-scale))
+      calc(1.25rem * var(--resume-margin-scale))
+      calc(1.25rem * var(--resume-margin-scale))
+      calc(1.5rem * var(--resume-margin-scale));
   }
 
   .resume-template.modern-template .resume-block,

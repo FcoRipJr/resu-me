@@ -241,6 +241,79 @@ textarea {
   width: 100%;
 }
 
+.editor-fieldset {
+  border: 1px solid #d8def0;
+  border-radius: 10px;
+  margin: 0 0 1.2rem;
+  padding: 0.85rem;
+}
+
+.editor-fieldset legend {
+  padding: 0 0.35rem;
+  font-weight: 700;
+}
+
+.editor-fieldset input[type="range"] {
+  display: block;
+  padding: 0;
+  margin: 0.35rem 0 0.75rem;
+}
+
+.reset-editor-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  margin-top: 0.35rem;
+}
+
+.section-editor-list {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.section-editor-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.section-editor-row > label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.section-editor-row input[type="checkbox"] {
+  width: auto;
+}
+
+.section-move-actions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.section-move-actions .icon-button {
+  width: 2rem;
+  height: 2rem;
+}
+
+.custom-section-form {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.8rem;
+}
+
+.custom-section-form button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
 .input-actions {
   display: flex;
   gap: 0.55rem;
@@ -335,13 +408,28 @@ textarea {
   --resume-muted: #475569;
   --resume-surface: #f8fafc;
   --resume-border: #e5e7eb;
+  --resume-font-scale: 1;
+  --resume-spacing-scale: 1;
+  --resume-margin-scale: 1;
   width: 100%;
   min-height: 280px;
-  padding: 1.5rem;
+  padding: calc(1.5rem * var(--resume-margin-scale));
+  font-size: calc(1rem * var(--resume-font-scale));
   background: white;
   color: var(--resume-ink);
   border-radius: 16px;
   border: 1px solid #e5e7eb;
+}
+
+.ats-template,
+.executive-template,
+.main-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.resume-section {
+  order: 1;
 }
 
 .resume-header {
@@ -354,7 +442,7 @@ textarea {
 .executive-header h1,
 .sidebar h1 {
   margin: 0 0 0.2rem;
-  font-size: clamp(2rem, 2vw, 2.7rem);
+  font-size: calc(clamp(2rem, 2vw, 2.7rem) * var(--resume-font-scale));
 }
 
 .resume-header p,
@@ -366,7 +454,7 @@ textarea {
 }
 
 .resume-block {
-  margin-bottom: 1.2rem;
+  margin-bottom: calc(1.2rem * var(--resume-spacing-scale));
 }
 
 .resume-block h2,
@@ -374,7 +462,7 @@ textarea {
 .sidebar-block h3 {
   margin: 0 0 0.65rem;
   color: var(--resume-accent);
-  font-size: 1rem;
+  font-size: calc(1rem * var(--resume-font-scale));
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -414,8 +502,8 @@ textarea {
 }
 
 .experience-item {
-  margin-bottom: 0.9rem;
-  padding-bottom: 0.7rem;
+  margin-bottom: calc(0.9rem * var(--resume-spacing-scale));
+  padding-bottom: calc(0.7rem * var(--resume-spacing-scale));
   border-bottom: 1px solid var(--resume-border);
 }
 
@@ -433,7 +521,7 @@ textarea {
 }
 
 .experience-header strong {
-  font-size: 1rem;
+  font-size: calc(1rem * var(--resume-font-scale));
 }
 
 .experience-header span {
@@ -463,7 +551,8 @@ textarea {
 .sidebar {
   background: var(--resume-dark);
   color: white;
-  padding: 1.5rem 1.25rem;
+  padding: calc(1.5rem * var(--resume-margin-scale))
+    calc(1.25rem * var(--resume-margin-scale));
 }
 
 .sidebar h1,
@@ -478,7 +567,9 @@ textarea {
 }
 
 .main-column {
-  padding: 1.5rem 1.25rem 1.5rem 0;
+  padding: calc(1.5rem * var(--resume-margin-scale))
+    calc(1.25rem * var(--resume-margin-scale))
+    calc(1.5rem * var(--resume-margin-scale)) 0;
 }
 
 .executive-template {

@@ -18,3 +18,18 @@ export const setStoredPreference = (key, value) => {
     window.localStorage.setItem(key, value);
   } catch {}
 };
+
+export const getStoredJsonPreference = (key, fallback) => {
+  try {
+    const value = window.localStorage.getItem(key);
+    return value ? JSON.parse(value) : fallback;
+  } catch {
+    return fallback;
+  }
+};
+
+export const setStoredJsonPreference = (key, value) => {
+  try {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  } catch {}
+};
