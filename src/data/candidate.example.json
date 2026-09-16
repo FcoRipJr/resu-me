@@ -1,0 +1,47 @@
+{
+  "candidate": {
+    "name": "Maria Souza",
+    "title": "Desenvolvedora Front-end",
+    "contact": {
+      "email": "maria@email.com",
+      "phone": "+55 11 99999-9999",
+      "location": "São Paulo, SP",
+      "linkedin": "linkedin.com/in/maria-souza",
+      "github": "github.com/mariasouza",
+      "portfolio": "mariasouza.dev",
+      "others": ["Behance: behance.net/mariasouza", "Medium: medium.com/@mariasouza"]
+    }
+  },
+  "objective": "Buscar oportunidades em desenvolvimento web com foco em experiência do usuário.",
+  "summary": "Desenvolvedora front-end com 4 anos de experiência em interfaces acessíveis e responsivas.",
+  "skills": ["React", "JavaScript", "CSS", "Acessibilidade", "UX"],
+  "experiences": [
+    {
+      "company": "Nova Tech",
+      "position": "Desenvolvedora Front-end",
+      "start": { "month": 1, "year": 2022 },
+      "end": null,
+      "current": true,
+      "duration_months": 24,
+      "description": "Desenvolvimento de interfaces para produtos digitais e dashboards corporativos.",
+      "skills": ["React", "TypeScript", "CSS"]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Universidade de São Paulo",
+      "degree": "Bacharel em Sistemas de Informação",
+      "start": { "month": 3, "year": 2017 },
+      "end": { "month": 12, "year": 2021 },
+      "current": false
+    }
+  ],
+  "certifications": ["AWS Cloud Practitioner"],
+  "languages": ["Português", "Inglês"],
+  "projects": [
+    {
+      "name": "Portal de Clientes",
+      "description": "Plataforma de autoatendimento em React e CSS moderno."
+    }
+  ]
+}

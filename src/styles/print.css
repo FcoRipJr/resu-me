@@ -1,0 +1,78 @@
+@media print {
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+
+  body {
+    background: white;
+  }
+
+  .topbar,
+  .page-grid > .panel:first-child,
+  .main-nav,
+  .print-button,
+  .action-card,
+  .hero-card .action-grid,
+  .message {
+    display: none !important;
+  }
+
+  .app-shell {
+    max-width: none;
+    padding: 0;
+  }
+
+  .page-grid {
+    display: block;
+  }
+
+  .page-content {
+    min-height: auto;
+  }
+
+  .panel.template-panel {
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    width: 100%;
+    max-width: 210mm;
+    margin: 0 auto;
+  }
+
+  .resume-template {
+    width: 100%;
+    max-width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    background: white;
+    color: #111827;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .resume-template.modern-template {
+    display: grid;
+    grid-template-columns: 38% 62%;
+    min-height: 297mm;
+    overflow: hidden;
+  }
+
+  .resume-template.modern-template .sidebar {
+    background: #0f172a;
+    color: white;
+  }
+
+  .resume-template.modern-template .main-column {
+    background: #f8fafc;
+    padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+  }
+
+  .resume-template.modern-template .resume-block,
+  .resume-template.modern-template .experience-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
