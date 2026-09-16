@@ -1,11 +1,11 @@
 {
   "candidate": {
     "name": "Maria Souza",
-    "title": "Desenvolvedora Front-end",
+    "title": "Front-end Developer",
     "contact": {
       "email": "maria@email.com",
       "phone": "+55 11 99999-9999",
-      "location": "São Paulo, SP",
+      "location": "Sao Paulo, Brazil",
       "linkedin": "linkedin.com/in/maria-souza",
       "github": "github.com/mariasouza",
       "portfolio": "mariasouza.dev",
@@ -15,36 +15,36 @@
       ]
     }
   },
-  "objective": "Buscar oportunidades em desenvolvimento web com foco em experiência do usuário.",
-  "summary": "Desenvolvedora front-end com 4 anos de experiência em interfaces acessíveis e responsivas.",
+  "objective": "Seeking web development opportunities focused on user experience.",
+  "summary": "Front-end developer with 4 years of experience building accessible and responsive interfaces.",
   "skills": ["React", "JavaScript", "CSS", "Acessibilidade", "UX"],
   "experiences": [
     {
       "company": "Nova Tech",
-      "position": "Desenvolvedora Front-end",
+      "position": "Front-end Developer",
       "start": { "month": 1, "year": 2022 },
       "end": null,
       "current": true,
       "duration_months": 24,
-      "description": "Desenvolvimento de interfaces para produtos digitais e dashboards corporativos.",
+      "description": "Developing interfaces for digital products and corporate dashboards.",
       "skills": ["React", "TypeScript", "CSS"]
     }
   ],
   "education": [
     {
-      "institution": "Universidade de São Paulo",
-      "degree": "Bacharel em Sistemas de Informação",
+      "institution": "University of Sao Paulo",
+      "degree": "Bachelor of Information Systems",
       "start": { "month": 3, "year": 2017 },
       "end": { "month": 12, "year": 2021 },
       "current": false
     }
   ],
   "certifications": ["AWS Cloud Practitioner"],
-  "languages": ["Português", "Inglês"],
+  "languages": ["Portuguese", "English"],
   "projects": [
     {
-      "name": "Portal de Clientes",
-      "description": "Plataforma de autoatendimento em React e CSS moderno."
+      "name": "Customer Portal",
+      "description": "React and modern CSS self-service platform."
     }
   ]
 }

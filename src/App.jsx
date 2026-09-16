@@ -27,7 +27,7 @@ function App() {
           </NavLink>
         </div>
 
-        <nav className="main-nav" aria-label="Navegação principal">
+        <nav className="main-nav" aria-label="Main navigation">
           <NavLink
             to="/optimize"
             className={({ isActive }) =>

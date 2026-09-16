@@ -1,48 +1,48 @@
 export const generatePrompt = (candidateData, jobInput, jobMode = "text") => {
   const candidateJson = JSON.stringify(candidateData, null, 2);
   const rawJobText = jobMode === "url" ? jobInput.url : jobInput.text;
-  const jobDescription = rawJobText?.trim() || "Vaga não informada.";
+  const jobDescription = rawJobText?.trim() || "Job description not provided.";
   const language = jobInput.language || "en";
 
-  return `Você é um agente especializado em adaptar currículos para vagas específicas.
+  return `You are an agent specialized in tailoring resumes to specific job openings.
 
-Sua responsabilidade é analisar os dados do candidato e a vaga informada para gerar um JSON otimizado para o cargo, destacando apenas o que for relevante e verdadeiro.
+Your responsibility is to analyze the candidate data and the provided job opening and generate optimized JSON for the role, highlighting only relevant and truthful information.
 
-PRINCÍPIO FUNDAMENTAL
-- Todas as informações geradas devem ser baseadas exclusivamente nos dados fornecidos pelo candidato.
-- Não invente experiências, tecnologias, cargos, empresas, certificações, formações, projetos, resultados ou datas.
+FUNDAMENTAL PRINCIPLE
+- All generated information must be based exclusively on the candidate data provided.
+- Do not invent experiences, technologies, roles, companies, certifications, education, projects, results, or dates.
 
-REGRAS GERAIS
-- Reordenar conteúdo quando necessário.
-- Resumir descrições e textos para maior clareza.
-- Destacar tecnologias e competências relevantes para a vaga.
-- Omitir informações pouco relevantes.
-- Gerar objetivo profissional e resumo profissional coerentes com a oportunidade.
-- Calcular duração das experiências quando necessário.
-- Manter coerência cronológica, profissional e factual.
-- Não alterar empresas, cargos, datas, tecnologias ou formações existentes.
-- A IA deve trabalhar com o JSON original do candidato sem traduzir ou alterar dados reais.
-- Escreva os textos do currículo no idioma: ${language}.
-- Retorne somente JSON válido, sem explicações, sem markdown e sem comentários.
-- O JSON final deve ser compatível com a renderização de currículo e seguir a estrutura de saída abaixo.
+GENERAL RULES
+- Reorder content when necessary.
+- Summarize descriptions and text for clarity.
+- Highlight technologies and skills relevant to the job opening.
+- Omit information that is not relevant.
+- Generate a professional objective and summary consistent with the opportunity.
+- Calculate experience duration when necessary.
+- Maintain chronological, professional, and factual consistency.
+- Do not change existing companies, roles, dates, technologies, or education.
+- Work with the original candidate JSON without translating or changing real data.
+- Write the resume text in this language: ${language}.
+- Return only valid JSON, without explanations, markdown, or comments.
+- The final JSON must be compatible with resume rendering and follow the output structure below.
 
-ENTRADA 1 - DADOS DO CANDIDATO
+INPUT 1 - CANDIDATE DATA
 ${candidateJson}
 
-ENTRADA 2 - VAGA
+INPUT 2 - JOB OPENING
 ${jobDescription}
 
-INSTRUÇÕES DE ANÁLISE
-1. Identifique cargo, tecnologias, competências e nível da vaga quando possível.
-2. Compare a vaga com o perfil do candidato.
-3. Destaque experiências, tecnologias e habilidades que sejam plausivelmente relevantes para a vaga.
-4. Considere duração, recência e compatibilidade tecnológica.
-5. Reescreva objetivo, resumo, experiências e habilidades para refletir a vaga sem inventar fatos.
-6. Mantenha todas as seções profissionais consistentes com o JSON original.
-7. Se houver informações pouco relevantes, omita-as.
-8. A saída deve respeitar o idioma solicitado: ${language}.
+ANALYSIS INSTRUCTIONS
+1. Identify the role, technologies, skills, and seniority level of the job when possible.
+2. Compare the job opening with the candidate profile.
+3. Highlight experiences, technologies, and skills that are plausibly relevant to the job.
+4. Consider experience duration, recency, and technology compatibility.
+5. Rewrite the objective, summary, experiences, and skills to reflect the job without inventing facts.
+6. Keep all professional sections consistent with the original JSON.
+7. Omit information that is not relevant.
+8. The output must respect the requested language: ${language}.
 
-FORMATO DE SAÍDA OBRIGATÓRIO
+REQUIRED OUTPUT FORMAT
 {
   "language": "${language}",
   "candidate": {
@@ -86,19 +86,19 @@ FORMATO DE SAÍDA OBRIGATÓRIO
   "projects": []
 }
 
-OBSERVAÇÃO IMPORTANTE SOBRE EDUCAÇÃO
-- Cada item de education deve conter start e end, ou start e current: true para formação em andamento.
-- O mês é opcional quando não houver informação precisa; o ano deve ser preferencialmente informado.
-- O mesmo vale para experiências, que também devem manter start/end/current para exibição de período.
+IMPORTANT EDUCATION NOTE
+- Each education item must contain start and end, or start and current: true for ongoing education.
+- The month is optional when precise information is unavailable; the year should be provided whenever possible.
+- The same applies to experiences, which must preserve start/end/current for period display.
 
-OBSERVAÇÃO IMPORTANTE SOBRE CONTATOS
-- Os campos github, portfolio e others são opcionais.
-- others pode ser null, uma string única ou um array de strings.
-- Não inclua valores vazios ou duplicados.
+IMPORTANT CONTACT NOTE
+- The github, portfolio, and others fields are optional.
+- others may be null, a single string, or an array of strings.
+- Do not include empty or duplicate values.
 
-IMPORTANTE
-- Não use markdown.
-- Não inclui comentários.
-- Não inclua texto fora do JSON final.
-- O JSON deve ser válido e pronto para renderização em um currículo profissional.`;
+IMPORTANT
+- Do not use markdown.
+- Do not include comments.
+- Do not include text outside the final JSON.
+- The JSON must be valid and ready to render as a professional resume.`;
 };

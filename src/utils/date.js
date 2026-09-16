@@ -1,16 +1,16 @@
 const monthNames = [
   "jan",
-  "fev",
+  "feb",
   "mar",
-  "abr",
+  "apr",
   "mai",
   "jun",
   "jul",
-  "ago",
-  "set",
-  "out",
+  "aug",
+  "sep",
+  "oct",
   "nov",
-  "dez",
+  "dec",
 ];
 
 const normalizeDateValue = (value) => {
@@ -30,11 +30,11 @@ const normalizeDateValue = (value) => {
 
 export const formatPeriod = (start, end, current = false) => {
   const startLabel = normalizeDateValue(start);
-  const endLabel = current ? "Atual" : normalizeDateValue(end);
+  const endLabel = current ? "Current" : normalizeDateValue(end);
 
   if (!startLabel && !endLabel) return "";
   if (!startLabel) return endLabel;
-  if (!endLabel) return `${startLabel} — Atual`;
+  if (!endLabel) return `${startLabel} — Current`;
 
   return `${startLabel} — ${endLabel}`;
 };

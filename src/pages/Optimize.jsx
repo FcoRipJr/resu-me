@@ -10,11 +10,11 @@ const languageValues = languageOptions.map((option) => option.value);
 const exampleCandidate = {
   candidate: {
     name: "Maria Souza",
-    title: "Desenvolvedora Front-end",
+    title: "Front-end Developer",
     contact: {
       email: "maria@email.com",
       phone: "+55 11 99999-9999",
-      location: "São Paulo, SP",
+      location: "Sao Paulo, Brazil",
       linkedin: "linkedin.com/in/maria-souza",
       github: "github.com/mariasouza",
       portfolio: "mariasouza.dev",
@@ -25,33 +25,33 @@ const exampleCandidate = {
     },
   },
   objective:
-    "Buscar oportunidades em desenvolvimento web com foco em experiência do usuário.",
-  summary: "Desenvolvedora front-end com 4 anos de experiência.",
+    "Seeking web development opportunities focused on user experience.",
+  summary: "Front-end developer with 4 years of experience.",
   skills: ["React", "JavaScript", "CSS", "UX", "Accessibility"],
   experiences: [
     {
       company: "Nova Tech",
-      position: "Desenvolvedora Front-end",
+      position: "Front-end Developer",
       start: { month: 1, year: 2022 },
       end: null,
       current: true,
       duration_months: 24,
-      description: "Desenvolvimento de interfaces para produtos digitais.",
+      description: "Developing interfaces for digital products.",
       skills: ["React", "TypeScript", "CSS"],
     },
   ],
   education: [
     {
-      institution: "Universidade de São Paulo",
-      degree: "Bacharel em Sistemas de Informação",
+      institution: "University of Sao Paulo",
+      degree: "Bachelor of Information Systems",
     },
   ],
   certifications: ["AWS Cloud Practitioner"],
-  languages: ["Português", "Inglês"],
+  languages: ["Portuguese", "English"],
   projects: [
     {
-      name: "Portal de Clientes",
-      description: "Plataforma de autoatendimento em React.",
+      name: "Customer Portal",
+      description: "React self-service platform.",
     },
   ],
 };
@@ -63,10 +63,10 @@ const readJsonFile = (file) =>
       try {
         resolve(JSON.parse(reader.result));
       } catch (error) {
-        reject(new Error("Arquivo JSON inválido."));
+        reject(new Error("Invalid JSON file."));
       }
     };
-    reader.onerror = () => reject(new Error("Não foi possível ler o arquivo."));
+    reader.onerror = () => reject(new Error("Could not read the file."));
     reader.readAsText(file);
   });
 
@@ -110,7 +110,7 @@ const Optimize = ({ language, t }) => {
       setCandidateJson(JSON.stringify(parsed, null, 2));
       setError("");
     } catch (uploadError) {
-      setError(uploadError.message || "Erro ao processar o arquivo JSON.");
+      setError(uploadError.message || "Could not process the JSON file.");
     }
   };
 
@@ -118,15 +118,15 @@ const Optimize = ({ language, t }) => {
     try {
       const parsed = JSON.parse(candidateJson);
       if (!parsed || typeof parsed !== "object") {
-        throw new Error("JSON do candidato deve ser um objeto válido.");
+        throw new Error("Candidate JSON must be a valid object.");
       }
 
       if (!selectedLanguage) {
-        throw new Error("Selecione o idioma do currículo.");
+        throw new Error("Select the resume language.");
       }
 
       if (!jobText.trim() && !jobUrl.trim()) {
-        throw new Error("Informe a vaga por texto ou URL.");
+        throw new Error("Provide the job by text or URL.");
       }
 
       setPrompt(
@@ -138,7 +138,7 @@ const Optimize = ({ language, t }) => {
       );
       setError("");
     } catch (generateError) {
-      setError(generateError.message || "Não foi possível gerar o prompt.");
+      setError(generateError.message || "Could not generate the prompt.");
     }
   };
 
@@ -146,11 +146,9 @@ const Optimize = ({ language, t }) => {
     if (!prompt) return;
     try {
       await navigator.clipboard.writeText(prompt);
-      setError("Prompt copiado para a área de transferência.");
+      setError(t.optimize.copied);
     } catch {
-      setError(
-        "Não foi possível copiar automaticamente. Copie o texto manualmente.",
-      );
+      setError(t.optimize.copyFailed);
     }
   };
 

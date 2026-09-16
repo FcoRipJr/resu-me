@@ -13,8 +13,8 @@ const ExecutiveTemplate = ({ resume }) => {
     <article className="resume-template executive-template">
       <header className="executive-header">
         <div>
-          <h1>{candidate.name || "Nome do candidato"}</h1>
-          <p>{candidate.title || "Cargo desejado"}</p>
+          <h1>{candidate.name || "Candidate name"}</h1>
+          <p>{candidate.title || "Desired role"}</p>
         </div>
         <div className="executive-contact">
           {contact.email && <span>{contact.email}</span>}
@@ -31,14 +31,14 @@ const ExecutiveTemplate = ({ resume }) => {
 
       {resume.summary && (
         <section className="resume-block">
-          <h2>Perfil</h2>
+          <h2>Profile</h2>
           <p>{resume.summary}</p>
         </section>
       )}
 
       {resume.skills?.length > 0 && (
         <section className="resume-block">
-          <h2>Competências</h2>
+          <h2>Skills</h2>
           <div className="chip-list">
             {resume.skills.map((skill) => (
               <span key={skill} className="chip">
@@ -51,7 +51,7 @@ const ExecutiveTemplate = ({ resume }) => {
 
       {resume.experiences?.length > 0 && (
         <section className="resume-block">
-          <h2>Experiência</h2>
+          <h2>Experience</h2>
           {resume.experiences.map((experience, index) => (
             <div
               key={`${experience.company}-${index}`}

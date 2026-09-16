@@ -105,14 +105,14 @@ const templateValues = Object.keys(templateMap);
 const paletteValues = paletteOptions.map((option) => option.value);
 
 const defaultResume = {
-  language: "pt-BR",
+  language: "en",
   candidate: {
     name: "Maria Souza",
-    title: "Desenvolvedora Front-end",
+    title: "Front-end Developer",
     contact: {
       email: "maria@email.com",
       phone: "+55 11 99999-9999",
-      location: "São Paulo, SP",
+      location: "Sao Paulo, Brazil",
       linkedin: "linkedin.com/in/maria-souza",
       github: "github.com/mariasouza",
       portfolio: "mariasouza.dev",
@@ -123,36 +123,36 @@ const defaultResume = {
     },
   },
   objective:
-    "Desenvolvedora front-end com foco em interfaces acessíveis e experiências digitais.",
+    "Front-end developer focused on accessible interfaces and digital experiences.",
   summary:
-    "Especialista em React, JavaScript e design de interfaces centradas no usuário.",
+    "Specialist in React, JavaScript, and user-centered interface design.",
   skills: ["React", "JavaScript", "CSS", "Acessibilidade", "UI/UX"],
   experiences: [
     {
       company: "Nova Tech",
-      position: "Desenvolvedora Front-end",
+      position: "Front-end Developer",
       start: { month: 1, year: 2022 },
       end: null,
       current: true,
       description:
-        "Desenvolvimento e manutenção de produtos digitais para clientes corporativos.",
+        "Developing and maintaining digital products for corporate clients.",
     },
   ],
   education: [
     {
-      institution: "Universidade de São Paulo",
-      degree: "Bacharel em Sistemas de Informação",
+      institution: "University of Sao Paulo",
+      degree: "Bachelor of Information Systems",
       start: { month: 3, year: 2017 },
       end: { month: 12, year: 2021 },
       current: false,
     },
   ],
   certifications: ["AWS Cloud Practitioner"],
-  languages: ["Português", "Inglês"],
+  languages: ["Portuguese", "English"],
   projects: [
     {
-      name: "Portal de clientes",
-      description: "Aplicação de autoatendimento em React.",
+      name: "Customer Portal",
+      description: "React self-service application.",
     },
   ],
 };
@@ -164,10 +164,10 @@ const readJsonFile = (file) =>
       try {
         resolve(JSON.parse(reader.result));
       } catch {
-        reject(new Error("Arquivo JSON inválido."));
+        reject(new Error("Invalid JSON file."));
       }
     };
-    reader.onerror = () => reject(new Error("Não foi possível ler o arquivo."));
+    reader.onerror = () => reject(new Error("Could not read the file."));
     reader.readAsText(file);
   });
 
@@ -202,7 +202,7 @@ const Generate = ({ t }) => {
       setResumeJson(JSON.stringify(parsed, null, 2));
       setError("");
     } catch (uploadError) {
-      setError(uploadError.message || "Erro ao carregar JSON.");
+      setError(uploadError.message || "Could not load the JSON file.");
     }
   };
 

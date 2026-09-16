@@ -12,16 +12,16 @@ const AtsTemplate = ({ resume }) => {
   return (
     <article className="resume-template ats-template">
       <header className="resume-header">
-        <h1>{candidate.name || "Nome do candidato"}</h1>
-        <p>{candidate.title || "Cargo desejado"}</p>
+        <h1>{candidate.name || "Candidate name"}</h1>
+        <p>{candidate.title || "Desired role"}</p>
       </header>
 
       <section className="resume-block">
-        <h2>Contato</h2>
+        <h2>Contact</h2>
         <ul>
           {contact.email && <li>Email: {contact.email}</li>}
-          {contact.phone && <li>Telefone: {contact.phone}</li>}
-          {contact.location && <li>Localização: {contact.location}</li>}
+          {contact.phone && <li>Phone: {contact.phone}</li>}
+          {contact.location && <li>Location: {contact.location}</li>}
           {contact.linkedin && <li>LinkedIn: {contact.linkedin}</li>}
           {contact.github && <li>GitHub: {contact.github}</li>}
           {contact.portfolio && <li>Portfolio: {contact.portfolio}</li>}
@@ -33,21 +33,21 @@ const AtsTemplate = ({ resume }) => {
 
       {resume.objective && (
         <section className="resume-block">
-          <h2>Objetivo</h2>
+          <h2>Objective</h2>
           <p>{resume.objective}</p>
         </section>
       )}
 
       {resume.summary && (
         <section className="resume-block">
-          <h2>Resumo</h2>
+          <h2>Summary</h2>
           <p>{resume.summary}</p>
         </section>
       )}
 
       {resume.skills?.length > 0 && (
         <section className="resume-block">
-          <h2>Habilidades</h2>
+          <h2>Skills</h2>
           <div className="chip-list">
             {resume.skills.map((skill) => (
               <span key={skill} className="chip">
@@ -60,7 +60,7 @@ const AtsTemplate = ({ resume }) => {
 
       {resume.experiences?.length > 0 && (
         <section className="resume-block">
-          <h2>Experiência</h2>
+          <h2>Experience</h2>
           {resume.experiences.map((experience, index) => (
             <div
               key={`${experience.company}-${index}`}
@@ -89,7 +89,7 @@ const AtsTemplate = ({ resume }) => {
 
       {resume.education?.length > 0 && (
         <section className="resume-block">
-          <h2>Educação</h2>
+          <h2>Education</h2>
           {resume.education.map((item, index) => (
             <div key={`${item.institution}-${index}`}>
               <strong>{item.degree}</strong>

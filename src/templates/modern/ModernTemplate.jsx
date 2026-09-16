@@ -12,11 +12,11 @@ const ModernTemplate = ({ resume }) => {
   return (
     <article className="resume-template modern-template">
       <aside className="sidebar">
-        <h1>{candidate.name || "Nome do candidato"}</h1>
-        <p className="role">{candidate.title || "Cargo desejado"}</p>
+        <h1>{candidate.name || "Candidate name"}</h1>
+        <p className="role">{candidate.title || "Desired role"}</p>
 
         <div className="sidebar-block">
-          <h3>Contato</h3>
+          <h3>Contact</h3>
           <ul>
             {contact.email && <li>{contact.email}</li>}
             {contact.phone && <li>{contact.phone}</li>}
@@ -45,14 +45,14 @@ const ModernTemplate = ({ resume }) => {
       <section className="main-column">
         {resume.summary && (
           <div className="resume-block">
-            <h2>Resumo</h2>
+            <h2>Summary</h2>
             <p>{resume.summary}</p>
           </div>
         )}
 
         {resume.experiences?.length > 0 && (
           <div className="resume-block">
-            <h2>Experiência</h2>
+            <h2>Experience</h2>
             {resume.experiences.map((experience, index) => (
               <div
                 key={`${experience.company}-${index}`}
@@ -81,7 +81,7 @@ const ModernTemplate = ({ resume }) => {
 
         {resume.education?.length > 0 && (
           <div className="resume-block">
-            <h2>Educação</h2>
+            <h2>Education</h2>
             {resume.education.map((item, index) => (
               <div key={`${item.institution}-${index}`}>
                 <strong>{item.degree}</strong>

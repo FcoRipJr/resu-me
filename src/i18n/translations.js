@@ -11,7 +11,7 @@ export const translations = {
       generate: "Gerar currículo",
     },
     home: {
-      eyebrow: "Currículo AI",
+      eyebrow: "Resu Me",
       title: "Crie currículos otimizados para vagas reais.",
       lead: "Esta ferramenta ajuda a transformar seu JSON de candidato em um prompt estruturado para IA e, depois, renderizar um currículo pronto para impressão em formato A4.",
       optimize: "Otimizar currículo",
@@ -95,7 +95,7 @@ export const translations = {
       generate: "Generate resume",
     },
     home: {
-      eyebrow: "Resume AI",
+      eyebrow: "Resu Me",
       title: "Create resumes optimized for real job openings.",
       lead: "This tool helps turn your candidate JSON into a structured prompt for AI and then render a resume ready for A4 printing.",
       optimize: "Optimize resume",
@@ -178,7 +178,7 @@ export const translations = {
       generate: "Generar currículum",
     },
     home: {
-      eyebrow: "Currículum AI",
+      eyebrow: "Resu Me",
       title: "Crea currículums optimizados para vacantes reales.",
       lead: "Esta herramienta ayuda a convertir tu JSON de candidato en un prompt estructurado para IA y luego renderizar un currículum listo para impresión A4.",
       optimize: "Optimizar currículum",

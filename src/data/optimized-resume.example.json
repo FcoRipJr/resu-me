@@ -1,12 +1,12 @@
 {
-  "language": "pt-BR",
+  "language": "en",
   "candidate": {
     "name": "Maria Souza",
-    "title": "Desenvolvedora Front-end",
+    "title": "Front-end Developer",
     "contact": {
       "email": "maria@email.com",
       "phone": "+55 11 99999-9999",
-      "location": "São Paulo, SP",
+      "location": "Sao Paulo, Brazil",
       "linkedin": "linkedin.com/in/maria-souza",
       "github": "github.com/mariasouza",
       "portfolio": "mariasouza.dev",
@@ -16,8 +16,8 @@
       ]
     }
   },
-  "objective": "Desenvolvedora front-end com foco em interfaces acessíveis e experiências digitais de alto impacto.",
-  "summary": "Especialista em React, JavaScript e design de interfaces com foco em desempenho, acessibilidade e usabilidade.",
+  "objective": "Front-end developer focused on accessible interfaces and high-impact digital experiences.",
+  "summary": "React and JavaScript specialist focused on performance, accessibility, and usability.",
   "skills": [
     "React",
     "JavaScript",
@@ -29,32 +29,32 @@
   "experiences": [
     {
       "company": "Nova Tech",
-      "position": "Desenvolvedora Front-end",
+      "position": "Front-end Developer",
       "start": { "month": 1, "year": 2022 },
       "end": null,
       "current": true,
-      "description": "Desenvolvimento e manutenção de interfaces para produtos digitais, dashboards e experiências responsivas para clientes corporativos.",
+      "description": "Developing and maintaining interfaces for digital products, dashboards, and responsive experiences for corporate clients.",
       "achievements": [
-        "Aumento da eficiência de interface em projetos críticos",
-        "Melhoria de acessibilidade em plataformas web"
+        "Improved interface efficiency in critical projects",
+        "Improved accessibility across web platforms"
       ]
     }
   ],
   "education": [
     {
-      "institution": "Universidade de São Paulo",
-      "degree": "Bacharel em Sistemas de Informação",
+      "institution": "University of Sao Paulo",
+      "degree": "Bachelor of Information Systems",
       "start": { "month": 3, "year": 2017 },
       "end": { "month": 12, "year": 2021 },
       "current": false
     }
   ],
   "certifications": ["AWS Cloud Practitioner"],
-  "languages": ["Português (nativo)", "Inglês (avançado)"],
+  "languages": ["Portuguese (native)", "English (advanced)"],
   "projects": [
     {
-      "name": "Portal de clientes",
-      "description": "Aplicação de autoatendimento em React com foco em UX, responsividade e performance."
+      "name": "Customer Portal",
+      "description": "React self-service application focused on UX, responsiveness, and performance."
     }
   ]
 }
