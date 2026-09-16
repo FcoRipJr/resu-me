@@ -11,10 +11,10 @@ const languageValues = languageOptions.map((option) => option.value);
 
 function App() {
   const [language, setLanguage] = useState(() =>
-    getStoredPreference(APP_LANGUAGE_KEY, "pt-BR", languageValues),
+    getStoredPreference(APP_LANGUAGE_KEY, "en", languageValues),
   );
   const t = useMemo(
-    () => translations[language] || translations["pt-BR"],
+    () => translations[language] || translations["en"],
     [language],
   );
 

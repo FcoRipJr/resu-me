@@ -237,6 +237,22 @@ textarea {
   flex-wrap: wrap;
 }
 
+.input-actions {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin: 0.55rem 0 0.8rem;
+}
+
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+}
+
 .preview-panel pre,
 .template-panel {
   white-space: pre-wrap;
@@ -267,6 +283,10 @@ textarea {
 
 .print-button {
   margin-top: 1rem;
+}
+
+.preview-action {
+  margin-bottom: 1rem;
 }
 
 .palette-swatches {

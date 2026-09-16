@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { Copy, Eye, Trash2 } from "lucide-react";
 import AtsTemplate from "../templates/ats/AtsTemplate";
 import ModernTemplate from "../templates/modern/ModernTemplate";
 import ExecutiveTemplate from "../templates/executive/ExecutiveTemplate";
@@ -205,25 +206,21 @@ const Generate = ({ t }) => {
     }
   };
 
+  const copyResumeContent = async () => {
+    if (!resumeJson) return;
+
+    try {
+      await navigator.clipboard.writeText(resumeJson);
+      setError(t.generate.contentCopied);
+    } catch {
+      setError(t.generate.copyFailed);
+    }
+  };
+
   return (
     <section className="page-grid generate-page">
       <div className="panel">
         <h2>{t.generate.title}</h2>
-
-        <div className="field-group">
-          <label htmlFor="resume-json">{t.generate.resumeJson}</label>
-          <textarea
-            id="resume-json"
-            rows={18}
-            value={resumeJson}
-            onChange={(event) => setResumeJson(event.target.value)}
-          />
-          <input
-            type="file"
-            accept="application/json"
-            onChange={handleFileUpload}
-          />
-        </div>
 
         <div className="field-group">
           <label htmlFor="template-select">{t.generate.template}</label>
@@ -268,20 +265,65 @@ const Generate = ({ t }) => {
           </div>
         </div>
 
-        {error && <div className="message error">{error}</div>}
+        <div className="field-group">
+          <label htmlFor="resume-json">{t.generate.resumeJson}</label>
+          <input
+            type="file"
+            accept="application/json"
+            onChange={handleFileUpload}
+          />
+          <div className="input-actions">
+            <button
+              type="button"
+              className="secondary icon-button"
+              title={t.generate.showExample}
+              aria-label={t.generate.showExample}
+              onClick={() =>
+                setResumeJson(JSON.stringify(defaultResume, null, 2))
+              }
+            >
+              <Eye aria-hidden="true" size={18} />
+            </button>
+            <button
+              type="button"
+              className="secondary icon-button"
+              title={t.generate.copyContent}
+              aria-label={t.generate.copyContent}
+              onClick={copyResumeContent}
+            >
+              <Copy aria-hidden="true" size={18} />
+            </button>
+            <button
+              type="button"
+              className="secondary icon-button"
+              title={t.generate.clearContent}
+              aria-label={t.generate.clearContent}
+              onClick={() => setResumeJson("")}
+            >
+              <Trash2 aria-hidden="true" size={18} />
+            </button>
+          </div>
+          <textarea
+            id="resume-json"
+            rows={18}
+            value={resumeJson}
+            onChange={(event) => setResumeJson(event.target.value)}
+          />
+        </div>
 
+        {error && <div className="message error">{error}</div>}
+      </div>
+
+      <div className="panel template-panel">
         {resume && (
           <button
             type="button"
             onClick={() => window.print()}
-            className="print-button"
+            className="print-button preview-action"
           >
             {t.generate.print}
           </button>
         )}
-      </div>
-
-      <div className="panel template-panel">
         {resume ? (
           <div className={`resume-palette palette-${palette}`}>
             <SelectedTemplate resume={resume} />
