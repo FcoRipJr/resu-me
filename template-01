@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Currículo - Francisco Ripardo</title>
+
+    <style>
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #e9ecef;
+            color: #222;
+            line-height: 1.45;
+        }
+
+
+        /* =========================================================
+           ÁREA DA TELA
+        ========================================================= */
+
+        .pagina {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 20px auto;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+        }
+
+
+        /* =========================================================
+           CURRÍCULO
+        ========================================================= */
+
+        #curriculo {
+            width: 100%;
+            min-height: 297mm;
+            padding: 15mm;
+
+            background: #fff;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        /* =========================================================
+           CABEÇALHO
+        ========================================================= */
+
+        .cabecalho {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            padding-bottom: 8px;
+            border-bottom: 2px solid #222;
+
+            margin-bottom: 12px;
+        }
+
+        .nome {
+            margin: 0;
+            font-size: 27px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .cargo {
+            margin: 3px 0 0;
+            font-size: 15px;
+            color: #555;
+        }
+
+        .contato {
+            text-align: right;
+            font-size: 10.5px;
+            line-height: 1.5;
+        }
+
+        .contato a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        /* =========================================================
+           SEÇÕES
+        ========================================================= */
+
+        .secao {
+            margin-bottom: 10px;
+
+            /* Evita que a seção seja dividida na impressão */
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .titulo-secao {
+            margin: 0 0 5px;
+
+            padding-bottom: 3px;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+
+            border-bottom: 1px solid #bbb;
+        }
+
+        .texto {
+            margin: 0;
+            font-size: 10.5px;
+            text-align: justify;
+        }
+
+
+        /* =========================================================
+           EXPERIÊNCIA PROFISSIONAL
+        ========================================================= */
+
+        .experiencia {
+            margin-bottom: 8px;
+
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .experiencia:last-child {
+            margin-bottom: 0;
+        }
+
+        .experiencia-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .empresa {
+            font-size: 11.5px;
+            font-weight: 700;
+        }
+
+        .periodo {
+            font-size: 10px;
+            color: #555;
+            white-space: nowrap;
+        }
+
+        .cargo-experiencia {
+            margin: 1px 0 3px;
+
+            font-size: 10.5px;
+            font-weight: 600;
+        }
+
+        .experiencia ul {
+            margin: 3px 0 0;
+            padding-left: 17px;
+
+            font-size: 10px;
+        }
+
+        .experiencia li {
+            margin-bottom: 2px;
+        }
+
+
+        /* =========================================================
+           FORMAÇÃO
+        ========================================================= */
+
+        .formacao-item {
+            display: flex;
+            justify-content: space-between;
+
+            margin-bottom: 5px;
+
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .formacao-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .curso {
+            font-size: 10.5px;
+            font-weight: 700;
+        }
+
+        .instituicao {
+            font-size: 10px;
+        }
+
+        .ano {
+            font-size: 10px;
+            color: #555;
+            white-space: nowrap;
+        }
+
+
+        /* =========================================================
+           HABILIDADES
+        ========================================================= */
+
+        .habilidades {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .habilidade {
+            padding: 3px 7px;
+
+            font-size: 9px;
+
+            border: 1px solid #aaa;
+            border-radius: 3px;
+
+            background: #f5f5f5;
+        }
+
+
+        /* =========================================================
+           PROJETOS
+        ========================================================= */
+
+        .projeto {
+            margin-bottom: 6px;
+
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .projeto:last-child {
+            margin-bottom: 0;
+        }
+
+        .projeto-titulo {
+            margin: 0;
+
+            font-size: 10.5px;
+            font-weight: 700;
+        }
+
+        .projeto-descricao {
+            margin: 1px 0 0;
+
+            font-size: 10px;
+        }
+
+
+        /* =========================================================
+           RODAPÉ
+        ========================================================= */
+
+        .rodape {
+            margin-top: auto;
+            padding-top: 7px;
+
+            border-top: 1px solid #ccc;
+
+            font-size: 8.5px;
+            color: #777;
+
+            text-align: center;
+        }
+
+
+        /* =========================================================
+           BOTÕES / ELEMENTOS SOMENTE DA TELA
+        ========================================================= */
+
+        .acoes {
+            width: 210mm;
+            margin: 15px auto 0;
+
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .btn {
+            border: 0;
+            padding: 8px 14px;
+
+            background: #222;
+            color: #fff;
+
+            border-radius: 4px;
+
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .btn:hover {
+            background: #444;
+        }
+
+
+        /* =========================================================
+           IMPRESSÃO
+        ========================================================= */
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        @media print {
+
+            /*
+             * Remove o fundo da página e qualquer espaçamento
+             * criado pelo navegador.
+             */
+            html,
+            body {
+                width: 210mm;
+                height: 297mm;
+
+                margin: 0;
+                padding: 0;
+
+                background: #fff;
+            }
+
+            /*
+             * Tudo que não for o currículo desaparece.
+             */
+            body * {
+                visibility: hidden;
+            }
+
+            /*
+             * Apenas o currículo e seus filhos ficam visíveis.
+             */
+            #curriculo,
+            #curriculo * {
+                visibility: visible;
+            }
+
+            /*
+             * Posiciona o currículo exatamente no canto
+             * superior esquerdo da folha.
+             */
+            #curriculo {
+                position: absolute;
+                left: 0;
+                top: 0;
+
+                width: 210mm;
+                min-height: 297mm;
+                height: 297mm;
+
+                margin: 0;
+
+                padding: 15mm;
+
+                box-shadow: none;
+            }
+
+            /*
+             * Esconde elementos auxiliares da impressão.
+             */
+            .acoes {
+                display: none !important;
+            }
+
+            /*
+             * Evita que determinados elementos sejam
+             * quebrados entre páginas.
+             */
+            .secao,
+            .experiencia,
+            .formacao-item,
+            .projeto {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            /*
+             * Mantém as cores e fundos durante a impressão.
+             */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+
+
+        /* =========================================================
+           RESPONSIVIDADE DA VISUALIZAÇÃO
+        ========================================================= */
+
+        @media screen and (max-width: 850px) {
+
+            .pagina {
+                width: calc(100% - 20px);
+                min-height: auto;
+                margin: 10px;
+            }
+
+            #curriculo {
+                min-height: auto;
+            }
+
+            .acoes {
+                width: calc(100% - 20px);
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================================
+         BOTÕES — NÃO APARECEM NA IMPRESSÃO
+    ========================================================== -->
+
+    <div class="acoes">
+        <button class="btn" onclick="window.print()">
+            Imprimir currículo
+        </button>
+    </div>
+
+
+    <!-- =========================================================
+         FOLHA A4
+    ========================================================== -->
+
+    <div class="pagina">
+
+        <!-- =====================================================
+             CONTEÚDO QUE SERÁ IMPRESSO
+        ====================================================== -->
+
+        <main id="curriculo">
+
+            <!-- CABEÇALHO -->
+
+            <header class="cabecalho">
+
+                <div>
+                    <h1 class="nome">
+                        Francisco Ripardo
+                    </h1>
+
+                    <p class="cargo">
+                        Desenvolvedor PHP Full Stack
+                    </p>
+                </div>
+
+                <div class="contato">
+                    <div>Manaus - AM, Brasil</div>
+                    <div>
+                        <a href="mailto:email@exemplo.com">
+                            email@exemplo.com
+                        </a>
+                    </div>
+                    <div>
+                        +55 (92) 99999-9999
+                    </div>
+                    <div>
+                        linkedin.com/in/seu-perfil
+                    </div>
+                    <div>
+                        github.com/seu-usuario
+                    </div>
+                </div>
+
+            </header>
+
+
+            <!-- RESUMO -->
+
+            <section class="secao">
+
+                <h2 class="titulo-secao">
+                    Perfil profissional
+                </h2>
+
+                <p class="texto">
+                    Desenvolvedor Full Stack com experiência no desenvolvimento
+                    e manutenção de aplicações web utilizando PHP, JavaScript,
+                    HTML, CSS, Laravel e MySQL. Experiência com desenvolvimento
+                    de APIs, integrações com serviços bancários, sistemas de
+                    gestão, emissão de documentos fiscais e automação de
+                    processos.
+                </p>
+
+            </section>
+
+
+            <!-- EXPERIÊNCIA -->
+
+            <section class="secao">
+
+                <h2 class="titulo-secao">
+                    Experiência profissional
+                </h2>
+
+
+                <article class="experiencia">
+
+                    <div class="experiencia-header">
+
+                        <span class="empresa">
+                            Nuvio Soluções
+                        </span>
+
+                        <span class="periodo">
+                            Jan 2023 — Atual
+                        </span>
+
+                    </div>
+
+                    <div class="cargo-experiencia">
+                        Desenvolvedor PHP Full Stack
+                    </div>
+
+                    <ul>
+                        <li>
+                            Desenvolvimento e manutenção de sistemas web
+                            utilizando PHP, JavaScript, HTML, CSS e Laravel.
+                        </li>
+
+                        <li>
+                            Desenvolvimento e integração de APIs e
+                            microsserviços.
+                        </li>
+
+                        <li>
+                            Integrações com APIs bancárias para geração e
+                            gerenciamento de cobranças e boletos.
+                        </li>
+
+                        <li>
+                            Implementação de emissão e integração de notas
+                            fiscais.
+                        </li>
+
+                        <li>
+                            Desenvolvimento de Jobs e processos automatizados
+                            utilizando Cron.
+                        </li>
+
+                        <li>
+                            Desenvolvimento e manutenção de bancos de dados
+                            MySQL.
+                        </li>
+                    </ul>
+
+                </article>
+
+
+                <article class="experiencia">
+
+                    <div class="experiencia-header">
+
+                        <span class="empresa">
+                            RJ Tecnologia
+                        </span>
+
+                        <span class="periodo">
+                            Período anterior
+                        </span>
+
+                    </div>
+
+                    <div class="cargo-experiencia">
+                        Desenvolvedor Web
+                    </div>
+
+                    <ul>
+
+                        <li>
+                            Desenvolvimento de sistemas para controle de
+                            produção industrial.
+                        </li>
+
+                        <li>
+                            Desenvolvimento utilizando PHP e JavaScript.
+                        </li>
+
+                        <li>
+                            Desenvolvimento e manutenção de consultas e
+                            estruturas em banco de dados Oracle.
+                        </li>
+
+                    </ul>
+
+                </article>
+
+            </section>
+
+
+            <!-- FORMAÇÃO -->
+
+            <section class="secao">
+
+                <h2 class="titulo-secao">
+                    Formação acadêmica
+                </h2>
+
+
+                <div class="formacao-item">
+
+                    <div>
+                        <div class="curso">
+                            Pós-graduação em Banco de Dados
+                        </div>
+
+                        <div class="instituicao">
+                            Instituição de ensino
+                        </div>
+                    </div>
+
+                    <div class="ano">
+                        Concluído
+                    </div>
+
+                </div>
+
+
+                <div class="formacao-item">
+
+                    <div>
+                        <div class="curso">
+                            Análise e Desenvolvimento de Sistemas
+                        </div>
+
+                        <div class="instituicao">
+                            Instituição de ensino
+                        </div>
+                    </div>
+
+                    <div class="ano">
+                        Concluído
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- HABILIDADES -->
+
+            <section class="secao">
+
+                <h2 class="titulo-secao">
+                    Conhecimentos técnicos
+                </h2>
+
+                <div class="habilidades">
+
+                    <span class="habilidade">PHP</span>
+                    <span class="habilidade">Laravel</span>
+                    <span class="habilidade">JavaScript</span>
+                    <span class="habilidade">HTML5</span>
+                    <span class="habilidade">CSS3</span>
+                    <span class="habilidade">MySQL</span>
+                    <span class="habilidade">Oracle</span>
+                    <span class="habilidade">REST APIs</span>
+                    <span class="habilidade">Microsserviços</span>
+                    <span class="habilidade">Git</span>
+                    <span class="habilidade">Linux</span>
+                    <span class="habilidade">Cron / Jobs</span>
+                </div>
+
+            </section>
+
+
+            <!-- PROJETOS -->
+
+            <section class="secao">
+
+                <h2 class="titulo-secao">
+                    Projetos / Experiência relevante
+                </h2>
+
+
+                <article class="projeto">
+
+                    <h3 class="projeto-titulo">
+                        Sistemas de gestão e automação
+                    </h3>
+
+                    <p class="projeto-descricao">
+                        Desenvolvimento de aplicações para gerenciamento
+                        de contratos, cobranças, integrações bancárias,
+                        emissão de documentos fiscais e automação de
+                        processos.
+                    </p>
+
+                </article>
+
+
+                <article class="projeto">
+
+                    <h3 class="projeto-titulo">
+                        Sistema de monitoramento de produção
+                    </h3>
+
+                    <p class="projeto-descricao">
+                        Desenvolvimento e manutenção de sistema para
+                        acompanhamento de produção industrial, incluindo
+                        coleta de dados, indicadores e integração com banco
+                        de dados.
+                    </p>
+
+                </article>
+
+            </section>
+
+
+            <!-- IDIOMAS -->
+
+            <section class="secao">
+
+                <h2 class="titulo-secao">
+                    Idiomas
+                </h2>
+
+                <p class="texto">
+                    Português — Nativo &nbsp;&nbsp;|&nbsp;&nbsp;
+                    Inglês — Intermediário
+                </p>
+
+            </section>
+
+
+            <!-- RODAPÉ -->
+
+            <footer class="rodape">
+                Currículo profissional — Francisco Ripardo
+            </footer>
+
+        </main>
+
+    </div>
+
+
+</body>
+</html>
