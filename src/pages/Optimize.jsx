@@ -298,7 +298,11 @@ const Optimize = ({ language, t }) => {
         )}
 
         <div className="action-row">
-          <button type="button" onClick={handleGeneratePrompt}>
+          <button
+            type="button"
+            className="panel-action"
+            onClick={handleGeneratePrompt}
+          >
             {t.optimize.generatePrompt}
           </button>
         </div>

@@ -319,7 +319,7 @@ const Generate = ({ t }) => {
           <button
             type="button"
             onClick={() => window.print()}
-            className="print-button preview-action"
+            className="print-button preview-action panel-action"
           >
             {t.generate.print}
           </button>

@@ -237,6 +237,10 @@ textarea {
   flex-wrap: wrap;
 }
 
+.panel-action {
+  width: 100%;
+}
+
 .input-actions {
   display: flex;
   gap: 0.55rem;
