@@ -1,6 +1,6 @@
 import { formatPeriod } from "../../utils/date";
 
-const AtsTemplate = ({ resume }) => {
+const AtsTemplate = ({ resume, dateFormat = "month-year" }) => {
   const candidate = resume?.candidate || {};
   const contact = candidate.contact || {};
   const others = Array.isArray(contact.others)
@@ -78,6 +78,10 @@ const AtsTemplate = ({ resume }) => {
                     experience.start,
                     experience.end,
                     experience.current,
+                    {
+                      locale: resume.language || "en",
+                      format: dateFormat,
+                    },
                   )}
                 </p>
               ) : null}
@@ -96,7 +100,10 @@ const AtsTemplate = ({ resume }) => {
               <p>{item.institution}</p>
               {(item.start || item.end) && (
                 <p className="experience-period">
-                  {formatPeriod(item.start, item.end, item.current)}
+                  {formatPeriod(item.start, item.end, item.current, {
+                    locale: resume.language || "en",
+                    format: dateFormat,
+                  })}
                 </p>
               )}
             </div>

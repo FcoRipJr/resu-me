@@ -1,4 +1,4 @@
-# resu-me
+# Resu.Me
 
 Resume generator focused on tailoring resumes to job openings and rendering them as print-ready documents.
 

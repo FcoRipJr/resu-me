@@ -1,6 +1,6 @@
 import { formatPeriod } from "../../utils/date";
 
-const ExecutiveTemplate = ({ resume }) => {
+const ExecutiveTemplate = ({ resume, dateFormat = "month-year" }) => {
   const candidate = resume?.candidate || {};
   const contact = candidate.contact || {};
   const others = Array.isArray(contact.others)
@@ -69,6 +69,10 @@ const ExecutiveTemplate = ({ resume }) => {
                     experience.start,
                     experience.end,
                     experience.current,
+                    {
+                      locale: resume.language || "en",
+                      format: dateFormat,
+                    },
                   )}
                 </p>
               ) : null}

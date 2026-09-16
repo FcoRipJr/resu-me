@@ -4,9 +4,11 @@ import AtsTemplate from "../templates/ats/AtsTemplate";
 import ModernTemplate from "../templates/modern/ModernTemplate";
 import ExecutiveTemplate from "../templates/executive/ExecutiveTemplate";
 import { getStoredPreference, setStoredPreference } from "../utils/storage";
+import { validateOptimizedResumeJson } from "../utils/validation";
 
 const TEMPLATE_KEY = "resu-me.resume-template";
 const PALETTE_KEY = "resu-me.resume-palette";
+const DATE_FORMAT_KEY = "resu-me.date-format";
 
 const templateMap = {
   ats: AtsTemplate,
@@ -103,6 +105,7 @@ const paletteOptions = [
 
 const templateValues = Object.keys(templateMap);
 const paletteValues = paletteOptions.map((option) => option.value);
+const dateFormatValues = ["month-year", "year", "full"];
 
 const defaultResume = {
   language: "en",
@@ -181,15 +184,10 @@ const Generate = ({ t }) => {
   const [palette, setPalette] = useState(() =>
     getStoredPreference(PALETTE_KEY, "ocean", paletteValues),
   );
+  const [dateFormat, setDateFormat] = useState(() =>
+    getStoredPreference(DATE_FORMAT_KEY, "month-year", dateFormatValues),
+  );
   const [error, setError] = useState("");
-
-  const resume = useMemo(() => {
-    try {
-      return JSON.parse(resumeJson);
-    } catch {
-      return null;
-    }
-  }, [resumeJson]);
 
   const SelectedTemplate = templateMap[template];
 
@@ -199,6 +197,10 @@ const Generate = ({ t }) => {
 
     try {
       const parsed = await readJsonFile(file);
+      const validationErrors = validateOptimizedResumeJson(parsed);
+      if (validationErrors.length > 0) {
+        throw new Error(validationErrors.join(" "));
+      }
       setResumeJson(JSON.stringify(parsed, null, 2));
       setError("");
     } catch (uploadError) {
@@ -216,6 +218,24 @@ const Generate = ({ t }) => {
       setError(t.generate.copyFailed);
     }
   };
+
+  const parsedResume = useMemo(() => {
+    try {
+      const parsed = JSON.parse(resumeJson);
+      const validationErrors = validateOptimizedResumeJson(parsed);
+      return {
+        resume: validationErrors.length === 0 ? parsed : null,
+        validationErrors,
+      };
+    } catch {
+      return {
+        resume: null,
+        validationErrors: ["Resume JSON must be valid JSON."],
+      };
+    }
+  }, [resumeJson]);
+
+  const resume = parsedResume.resume;
 
   return (
     <section className="page-grid generate-page">
@@ -236,6 +256,25 @@ const Generate = ({ t }) => {
             <option value="ats">{t.generate.ats}</option>
             <option value="modern">{t.generate.modern}</option>
             <option value="executive">{t.generate.executive}</option>
+          </select>
+        </div>
+
+        <div className="field-group">
+          <label htmlFor="date-format-select">{t.generate.dateFormat}</label>
+          <select
+            id="date-format-select"
+            value={dateFormat}
+            onChange={(event) => {
+              const nextFormat = event.target.value;
+              setDateFormat(nextFormat);
+              setStoredPreference(DATE_FORMAT_KEY, nextFormat);
+            }}
+          >
+            <option value="month-year">
+              {t.generate.dateFormats.monthYear}
+            </option>
+            <option value="year">{t.generate.dateFormats.year}</option>
+            <option value="full">{t.generate.dateFormats.full}</option>
           </select>
         </div>
 
@@ -311,7 +350,11 @@ const Generate = ({ t }) => {
           />
         </div>
 
-        {error && <div className="message error">{error}</div>}
+        {(error || parsedResume.validationErrors.length > 0) && (
+          <div className="message error">
+            {error || parsedResume.validationErrors.join(" ")}
+          </div>
+        )}
       </div>
 
       <div className="panel template-panel">
@@ -326,7 +369,7 @@ const Generate = ({ t }) => {
         )}
         {resume ? (
           <div className={`resume-palette palette-${palette}`}>
-            <SelectedTemplate resume={resume} />
+            <SelectedTemplate resume={resume} dateFormat={dateFormat} />
           </div>
         ) : (
           <p>{t.generate.invalidResume}</p>

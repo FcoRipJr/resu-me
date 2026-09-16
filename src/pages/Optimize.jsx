@@ -3,6 +3,7 @@ import { Copy, Eye, Trash2 } from "lucide-react";
 import { generatePrompt } from "../services/promptGenerator";
 import { languageOptions } from "../i18n/translations";
 import { getStoredPreference, setStoredPreference } from "../utils/storage";
+import { validateCandidateJson } from "../utils/validation";
 
 const RESUME_LANGUAGE_KEY = "resu-me.resume-language";
 const languageValues = languageOptions.map((option) => option.value);
@@ -107,6 +108,10 @@ const Optimize = ({ language, t }) => {
 
     try {
       const parsed = await readJsonFile(file);
+      const validationErrors = validateCandidateJson(parsed);
+      if (validationErrors.length > 0) {
+        throw new Error(validationErrors.join(" "));
+      }
       setCandidateJson(JSON.stringify(parsed, null, 2));
       setError("");
     } catch (uploadError) {
@@ -119,6 +124,11 @@ const Optimize = ({ language, t }) => {
       const parsed = JSON.parse(candidateJson);
       if (!parsed || typeof parsed !== "object") {
         throw new Error("Candidate JSON must be a valid object.");
+      }
+
+      const validationErrors = validateCandidateJson(parsed);
+      if (validationErrors.length > 0) {
+        throw new Error(validationErrors.join(" "));
       }
 
       if (!selectedLanguage) {
