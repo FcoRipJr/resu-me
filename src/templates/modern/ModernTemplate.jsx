@@ -1,19 +1,19 @@
-import { formatPeriod } from '../../utils/date';
+import { formatPeriod } from "../../utils/date";
 
 const ModernTemplate = ({ resume }) => {
   const candidate = resume?.candidate || {};
   const contact = candidate.contact || {};
   const others = Array.isArray(contact.others)
     ? contact.others.filter(Boolean)
-    : typeof contact.others === 'string' && contact.others.trim()
+    : typeof contact.others === "string" && contact.others.trim()
       ? [contact.others.trim()]
       : [];
 
   return (
     <article className="resume-template modern-template">
       <aside className="sidebar">
-        <h1>{candidate.name || 'Nome do candidato'}</h1>
-        <p className="role">{candidate.title || 'Cargo desejado'}</p>
+        <h1>{candidate.name || "Nome do candidato"}</h1>
+        <p className="role">{candidate.title || "Cargo desejado"}</p>
 
         <div className="sidebar-block">
           <h3>Contato</h3>
@@ -54,13 +54,24 @@ const ModernTemplate = ({ resume }) => {
           <div className="resume-block">
             <h2>Experiência</h2>
             {resume.experiences.map((experience, index) => (
-              <div key={`${experience.company}-${index}`} className="experience-item">
+              <div
+                key={`${experience.company}-${index}`}
+                className="experience-item"
+              >
                 <div className="experience-header">
                   <strong>{experience.position}</strong>
                 </div>
-                {experience.company && <div className="experience-company">{experience.company}</div>}
+                {experience.company && (
+                  <div className="experience-company">{experience.company}</div>
+                )}
                 {experience.start || experience.end || experience.current ? (
-                  <p className="experience-period">{formatPeriod(experience.start, experience.end, experience.current)}</p>
+                  <p className="experience-period">
+                    {formatPeriod(
+                      experience.start,
+                      experience.end,
+                      experience.current,
+                    )}
+                  </p>
                 ) : null}
                 <p>{experience.description}</p>
               </div>
@@ -76,7 +87,9 @@ const ModernTemplate = ({ resume }) => {
                 <strong>{item.degree}</strong>
                 <p>{item.institution}</p>
                 {(item.start || item.end) && (
-                  <p className="experience-period">{formatPeriod(item.start, item.end, item.current)}</p>
+                  <p className="experience-period">
+                    {formatPeriod(item.start, item.end, item.current)}
+                  </p>
                 )}
               </div>
             ))}

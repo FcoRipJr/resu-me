@@ -1,19 +1,19 @@
-import { formatPeriod } from '../../utils/date';
+import { formatPeriod } from "../../utils/date";
 
 const AtsTemplate = ({ resume }) => {
   const candidate = resume?.candidate || {};
   const contact = candidate.contact || {};
   const others = Array.isArray(contact.others)
     ? contact.others.filter(Boolean)
-    : typeof contact.others === 'string' && contact.others.trim()
+    : typeof contact.others === "string" && contact.others.trim()
       ? [contact.others.trim()]
       : [];
 
   return (
     <article className="resume-template ats-template">
       <header className="resume-header">
-        <h1>{candidate.name || 'Nome do candidato'}</h1>
-        <p>{candidate.title || 'Cargo desejado'}</p>
+        <h1>{candidate.name || "Nome do candidato"}</h1>
+        <p>{candidate.title || "Cargo desejado"}</p>
       </header>
 
       <section className="resume-block">
@@ -50,7 +50,9 @@ const AtsTemplate = ({ resume }) => {
           <h2>Habilidades</h2>
           <div className="chip-list">
             {resume.skills.map((skill) => (
-              <span key={skill} className="chip">{skill}</span>
+              <span key={skill} className="chip">
+                {skill}
+              </span>
             ))}
           </div>
         </section>
@@ -60,13 +62,24 @@ const AtsTemplate = ({ resume }) => {
         <section className="resume-block">
           <h2>Experiência</h2>
           {resume.experiences.map((experience, index) => (
-            <div key={`${experience.company}-${index}`} className="experience-item">
+            <div
+              key={`${experience.company}-${index}`}
+              className="experience-item"
+            >
               <div className="experience-header">
                 <strong>{experience.position}</strong>
               </div>
-              {experience.company && <div className="experience-company">{experience.company}</div>}
+              {experience.company && (
+                <div className="experience-company">{experience.company}</div>
+              )}
               {experience.start || experience.end || experience.current ? (
-                <p className="experience-period">{formatPeriod(experience.start, experience.end, experience.current)}</p>
+                <p className="experience-period">
+                  {formatPeriod(
+                    experience.start,
+                    experience.end,
+                    experience.current,
+                  )}
+                </p>
               ) : null}
               {experience.description && <p>{experience.description}</p>}
             </div>
@@ -82,7 +95,9 @@ const AtsTemplate = ({ resume }) => {
               <strong>{item.degree}</strong>
               <p>{item.institution}</p>
               {(item.start || item.end) && (
-                <p className="experience-period">{formatPeriod(item.start, item.end, item.current)}</p>
+                <p className="experience-period">
+                  {formatPeriod(item.start, item.end, item.current)}
+                </p>
               )}
             </div>
           ))}

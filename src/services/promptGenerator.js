@@ -1,8 +1,8 @@
-export const generatePrompt = (candidateData, jobInput, jobMode = 'text') => {
+export const generatePrompt = (candidateData, jobInput, jobMode = "text") => {
   const candidateJson = JSON.stringify(candidateData, null, 2);
-  const rawJobText = jobMode === 'url' ? jobInput.url : jobInput.text;
-  const jobDescription = rawJobText?.trim() || 'Vaga não informada.';
-  const language = jobInput.language || 'pt-BR';
+  const rawJobText = jobMode === "url" ? jobInput.url : jobInput.text;
+  const jobDescription = rawJobText?.trim() || "Vaga não informada.";
+  const language = jobInput.language || "pt-BR";
 
   return `Você é um agente especializado em adaptar currículos para vagas específicas.
 
