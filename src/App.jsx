@@ -3,6 +3,7 @@ import { Routes, Route, NavLink } from "react-router-dom";
 import Home from "./pages/Home";
 import Optimize from "./pages/Optimize";
 import Generate from "./pages/Generate";
+import CandidateEditor from "./pages/CandidateEditor";
 import { translations, languageOptions } from "./i18n/translations";
 import { getStoredPreference, setStoredPreference } from "./utils/storage";
 
@@ -28,6 +29,14 @@ function App() {
         </div>
 
         <nav className="main-nav" aria-label="Main navigation">
+          <NavLink
+            to="/candidate"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            {t.nav.candidate}
+          </NavLink>
           <NavLink
             to="/optimize"
             className={({ isActive }) =>
@@ -79,6 +88,7 @@ function App() {
             path="/generate"
             element={<Generate language={language} t={t} />}
           />
+          <Route path="/candidate" element={<CandidateEditor t={t} />} />
         </Routes>
       </main>
     </div>

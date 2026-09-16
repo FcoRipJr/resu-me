@@ -1,20 +1,28 @@
 # Resu.Me
 
-Resume generator focused on tailoring resumes to job openings and rendering them as print-ready documents.
+Resume editor and generator focused on building candidate data, tailoring resumes to job openings, and rendering them as print-ready documents.
 
 The application runs entirely in the browser. It does not provide an AI backend: the optimization page prepares a structured prompt for an external AI service, and the generation page renders the JSON returned by that service.
 
 ## Features
 
-- Candidate JSON input with file upload, example, copy, and clear actions.
+- Bidirectional candidate editor: form fields update the candidate JSON and valid JSON edits update the form.
+- Candidate editor with identity, contact details, objective, summary, skills, experience, education, certifications, languages, and projects.
+- Candidate experience skills, dates, current status, and comma-separated list fields.
+- Candidate JSON file upload, example, copy, clear, and download actions.
 - Job description input by text or URL.
 - Prompt generation for external AI tools.
 - Resume JSON input with file upload, example, copy, and clear actions.
+- JSON validation for candidate and optimized resume structures, including date validation and short-year normalization such as `21` to `2021`.
 - 15 resume templates: ATS, Modern, Executive, Minimal, Creative, Academic, Split Executive, Editorial, Compact, Timeline, Monochrome, Geometric, Serif, Portfolio, and High Contrast.
 - 21 predefined color palettes.
+- Individual color editing for the five colors of the selected palette. Selecting another palette restores its default colors.
+- Visual resume editor for font scale, spacing, margins, and date format.
+- Section editor for visibility, ordering, projects, and custom sections.
+- Reset controls for visual settings and default section order.
 - A4 print layout and PDF export through the browser print dialog.
 - English as the default interface and resume language, with Portuguese and Spanish translations available.
-- Browser persistence for the selected interface language, resume language, template, and color palette.
+- Browser persistence for language, resume language, template, palette, date format, visual settings, and section settings.
 - Contact fields for email, phone, location, LinkedIn, GitHub, portfolio, and custom links.
 
 ## Technology Stack
@@ -67,26 +75,41 @@ The preview server runs at `http://localhost:4173`.
 
 ## Usage
 
-### 1. Optimize a candidate profile
+### 1. Build the candidate profile
+
+1. Open **Edit candidate**. This is the first step of the workflow.
+2. Fill in the form fields, or edit the candidate JSON directly.
+3. Use comma-separated fields for skills, languages, certifications, and additional links.
+4. Add experiences, experience skills, education, and projects as needed.
+5. Load an existing candidate JSON file, copy the JSON, download it, or clear all fields.
+
+The form and JSON editor are bidirectional: changing a valid JSON value updates the corresponding form field, and changing a form field updates the JSON.
+
+### 2. Optimize a candidate profile
 
 1. Open **Optimize resume**.
-2. Paste the candidate JSON or load a JSON file.
+2. Paste the candidate JSON from the candidate editor or load a JSON file.
 3. Add the job description as text or provide a job URL.
 4. Select the language of the resume output.
 5. Click **Generate prompt**.
 6. Copy the generated prompt and submit it to an external AI service.
 7. Ask the service to return only the optimized JSON described in the prompt.
 
-### 2. Generate the resume
+### 3. Generate the resume
 
 1. Open **Generate resume**.
 2. Paste the optimized JSON or load a JSON file.
 3. Choose one of the 15 available templates.
 4. Choose a color palette.
-5. Review the preview.
-6. Click **Print / Save as PDF** and select a PDF printer in the browser dialog.
+5. Optionally edit individual palette colors.
+6. Adjust font size, spacing, margins, and date format.
+7. Reorder, hide, or add resume sections.
+8. Review the preview.
+9. Click **Print / Save as PDF** and select a PDF printer in the browser dialog.
 
-The browser language, resume language, selected template, and selected palette are stored in `localStorage` and restored on the next visit.
+The interface language, resume language, selected template, palette, date format, visual settings, section order, hidden sections, and custom sections are stored in `localStorage` and restored on the next visit.
+
+The visual editor includes a reset button. Changing the selected palette always restores that palette's default colors instead of carrying custom colors from the previous palette.
 
 ## Candidate JSON Format
 
@@ -153,6 +176,7 @@ The candidate input contains the candidate profile and source information. Dates
 - `year` should be provided whenever possible.
 - Ongoing experiences or education use `current: true` and may use `end: null`.
 - Experiences and education display their periods in the rendered resume.
+- Two-digit years such as `21` are accepted and displayed as `2021`.
 
 ## Optimized Resume JSON Format
 
@@ -226,11 +250,11 @@ The project does not send candidate data or job descriptions to a server. The us
 src/
 	data/                 Example candidate and optimized JSON files
 	i18n/                 Interface translations
-	pages/                Home, optimization, and generation pages
+  pages/                Home, candidate editor, optimization, and generation pages
 	services/             Prompt generation logic
 	styles/               Screen and print styles
-	templates/            ATS, Modern, and Executive templates
-	utils/                Date formatting and browser storage helpers
+  templates/            15 resume templates and shared additional renderer
+  utils/                Date formatting, JSON validation, and browser storage helpers
 ```
 
 ## License

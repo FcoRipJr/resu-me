@@ -196,6 +196,85 @@ textarea {
   gap: 1.5rem;
 }
 
+.candidate-editor {
+  align-items: start;
+}
+
+.candidate-form-panel > label,
+.candidate-form-panel > .editor-fieldset > label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.candidate-form-panel > label input,
+.candidate-form-panel > label textarea,
+.candidate-form-panel .editor-fieldset label input,
+.candidate-form-panel .editor-fieldset label textarea {
+  display: block;
+  margin-top: 0.4rem;
+  font-weight: 400;
+}
+
+.editor-toolbar {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.8rem;
+}
+
+.file-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.file-button input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.repeatable-editor {
+  display: grid;
+  gap: 0.55rem;
+  padding: 0.8rem;
+  margin-bottom: 0.8rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.date-input-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.45rem;
+}
+
+.inline-checkbox {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0 !important;
+}
+
+.inline-checkbox input {
+  width: auto !important;
+  margin: 0 !important;
+}
+
+.candidate-json-editor {
+  min-height: 680px;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  line-height: 1.45;
+}
+
 .panel {
   background: rgba(255, 255, 255, 0.92);
   border-radius: 20px;
@@ -1080,5 +1159,13 @@ textarea {
 
   .executive-contact {
     text-align: left;
+  }
+
+  .candidate-json-editor {
+    min-height: 420px;
+  }
+
+  .date-input-row {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

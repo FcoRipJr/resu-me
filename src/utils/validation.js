@@ -12,7 +12,8 @@ const isDateValue = (value) => {
     (month === undefined ||
       (Number.isInteger(month) && month >= 1 && month <= 12)) &&
     (year === undefined ||
-      (Number.isInteger(year) && year >= 1900 && year <= 2200)) &&
+      (Number.isInteger(year) &&
+        ((year >= 0 && year <= 99) || (year >= 1900 && year <= 2200)))) &&
     (month !== undefined || year !== undefined)
   );
 };

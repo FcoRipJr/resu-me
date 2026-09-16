@@ -94,6 +94,14 @@ const currentLabels = {
   es: "Actual",
 };
 
+const normalizeYear = (year) => {
+  if (year === undefined || year === null || year === "") return "";
+  const numericYear = Number(year);
+  return numericYear >= 0 && numericYear <= 99
+    ? String(2000 + numericYear).padStart(4, "0")
+    : String(year);
+};
+
 const normalizeDateValue = (
   value,
   { locale = "en", format = "month-year" } = {},
@@ -105,12 +113,13 @@ const normalizeDateValue = (
     const year = value.year ?? value.start_year ?? value.end_year;
 
     if (!year && !month) return "";
-    if (format === "year" || !month) return year ? String(year) : "";
+    const normalizedYear = normalizeYear(year);
+    if (format === "year" || !month) return normalizedYear;
     const names = format === "full" ? fullMonthNames : monthNames;
     const label = month
       ? names[locale]?.[Number(month) - 1] || names.en[Number(month) - 1]
       : "";
-    return [label, year ? String(year) : ""].filter(Boolean).join(" ");
+    return [label, normalizedYear].filter(Boolean).join(" ");
   }
 
   return String(value);
