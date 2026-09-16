@@ -1,0 +1,104 @@
+<div class="container">
+
+  <aside class="sidebar">
+
+    <h1>{{name}}</h1>
+
+    <p>{{desired_position}}</p>
+
+    <hr>
+
+    <h3>Contato</h3>
+
+    <p>{{email}}</p>
+    <p>{{phone}}</p>
+    <p>{{city}}</p>
+    <p>{{linkedin}}</p>
+    <p>{{github}}</p>
+
+    <hr>
+
+    <h3>Competências</h3>
+
+    <ul>
+      {{#skills}}
+      <li>{{.}}</li>
+      {{/skills}}
+    </ul>
+
+    <hr>
+
+    <h3>Certificações</h3>
+
+    {{#certifications}}
+    <p>
+      <strong>{{title}}</strong><br>
+      {{issuer}}
+    </p>
+    {{/certifications}}
+
+  </aside>
+
+  <main>
+
+    <section>
+
+      <h2>Resumo Profissional</h2>
+
+      <p>
+        {{objective}}
+      </p>
+
+    </section>
+
+    <section>
+
+      <h2>Experiência Profissional</h2>
+
+      {{#experiences}}
+
+      <div class="experience">
+
+        <h3>{{position}}</h3>
+
+        <strong>{{company}}</strong>
+
+        <span>
+          {{start_month}}/{{start_year}}
+          -
+          {{period_label}}
+        </span>
+
+        <p>{{description}}</p>
+
+        <small>
+          Tecnologias:
+          {{skills_text}}
+        </small>
+
+      </div>
+
+      {{/experiences}}
+
+    </section>
+
+    <section>
+
+      <h2>Formação</h2>
+
+      {{#education}}
+
+      <div>
+
+        <strong>{{course}}</strong><br>
+        {{institution}}
+
+      </div>
+
+      {{/education}}
+
+    </section>
+
+  </main>
+
+</div>
