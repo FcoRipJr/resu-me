@@ -10,27 +10,90 @@ const templateMap = {
 };
 
 const paletteOptions = [
-  { value: "ocean", colors: ["#0f172a", "#1d4ed8", "#dbeafe", "#111827", "#374151"] },
-  { value: "forest", colors: ["#17352f", "#18794e", "#d8f3e5", "#17221f", "#3d5149"] },
-  { value: "terracotta", colors: ["#4a2420", "#b4533c", "#f8dfd5", "#2b211f", "#59433d"] },
-  { value: "violet", colors: ["#2e2450", "#6941c6", "#e9ddff", "#211c32", "#514b62"] },
-  { value: "slate", colors: ["#263746", "#38658a", "#dceaf4", "#1f2933", "#465463"] },
-  { value: "mustard", colors: ["#3f3520", "#a66a00", "#f6e8b1", "#29251c", "#5b5548"] },
-  { value: "ruby", colors: ["#451a24", "#b4233f", "#fbd5dd", "#2b1720", "#5a3b43"] },
-  { value: "ember", colors: ["#472617", "#c2410c", "#ffdfc7", "#2d1b13", "#62473b"] },
-  { value: "coral", colors: ["#49302d", "#d05d55", "#fbdad5", "#2d2423", "#654c49"] },
-  { value: "rose", colors: ["#4b253b", "#c2467a", "#f8d8e7", "#2e1d27", "#604552"] },
-  { value: "plum", colors: ["#38243d", "#8b4c9f", "#ead8ef", "#251b29", "#55465a"] },
-  { value: "indigo", colors: ["#202a52", "#4f46a5", "#dfe1ff", "#1b2038", "#434a68"] },
-  { value: "cobalt", colors: ["#102f4f", "#1671c5", "#d4ebff", "#142333", "#3e566b"] },
-  { value: "teal", colors: ["#123c42", "#0f8b8d", "#d0f0ee", "#172c30", "#3e5d60"] },
-  { value: "lagoon", colors: ["#123b4a", "#168aad", "#d4f1f9", "#172a35", "#42616b"] },
-  { value: "mint", colors: ["#1d403b", "#299d83", "#d5f4e9", "#182b28", "#46645c"] },
-  { value: "cyan", colors: ["#16404c", "#0891b2", "#cff5fb", "#172c34", "#42616a"] },
-  { value: "amber", colors: ["#4a3515", "#d18b00", "#ffedb5", "#302616", "#66563a"] },
-  { value: "olive", colors: ["#35401d", "#718c20", "#e8efc4", "#252b1b", "#566044"] },
-  { value: "coffee", colors: ["#3e2b25", "#976044", "#f0ddd0", "#29201c", "#5d4940"] },
-  { value: "graphite", colors: ["#20252b", "#59636e", "#e1e6eb", "#181b20", "#454d56"] },
+  {
+    value: "ocean",
+    colors: ["#0f172a", "#1d4ed8", "#dbeafe", "#111827", "#374151"],
+  },
+  {
+    value: "forest",
+    colors: ["#17352f", "#18794e", "#d8f3e5", "#17221f", "#3d5149"],
+  },
+  {
+    value: "terracotta",
+    colors: ["#4a2420", "#b4533c", "#f8dfd5", "#2b211f", "#59433d"],
+  },
+  {
+    value: "violet",
+    colors: ["#2e2450", "#6941c6", "#e9ddff", "#211c32", "#514b62"],
+  },
+  {
+    value: "slate",
+    colors: ["#263746", "#38658a", "#dceaf4", "#1f2933", "#465463"],
+  },
+  {
+    value: "mustard",
+    colors: ["#3f3520", "#a66a00", "#f6e8b1", "#29251c", "#5b5548"],
+  },
+  {
+    value: "ruby",
+    colors: ["#451a24", "#b4233f", "#fbd5dd", "#2b1720", "#5a3b43"],
+  },
+  {
+    value: "ember",
+    colors: ["#472617", "#c2410c", "#ffdfc7", "#2d1b13", "#62473b"],
+  },
+  {
+    value: "coral",
+    colors: ["#49302d", "#d05d55", "#fbdad5", "#2d2423", "#654c49"],
+  },
+  {
+    value: "rose",
+    colors: ["#4b253b", "#c2467a", "#f8d8e7", "#2e1d27", "#604552"],
+  },
+  {
+    value: "plum",
+    colors: ["#38243d", "#8b4c9f", "#ead8ef", "#251b29", "#55465a"],
+  },
+  {
+    value: "indigo",
+    colors: ["#202a52", "#4f46a5", "#dfe1ff", "#1b2038", "#434a68"],
+  },
+  {
+    value: "cobalt",
+    colors: ["#102f4f", "#1671c5", "#d4ebff", "#142333", "#3e566b"],
+  },
+  {
+    value: "teal",
+    colors: ["#123c42", "#0f8b8d", "#d0f0ee", "#172c30", "#3e5d60"],
+  },
+  {
+    value: "lagoon",
+    colors: ["#123b4a", "#168aad", "#d4f1f9", "#172a35", "#42616b"],
+  },
+  {
+    value: "mint",
+    colors: ["#1d403b", "#299d83", "#d5f4e9", "#182b28", "#46645c"],
+  },
+  {
+    value: "cyan",
+    colors: ["#16404c", "#0891b2", "#cff5fb", "#172c34", "#42616a"],
+  },
+  {
+    value: "amber",
+    colors: ["#4a3515", "#d18b00", "#ffedb5", "#302616", "#66563a"],
+  },
+  {
+    value: "olive",
+    colors: ["#35401d", "#718c20", "#e8efc4", "#252b1b", "#566044"],
+  },
+  {
+    value: "coffee",
+    colors: ["#3e2b25", "#976044", "#f0ddd0", "#29201c", "#5d4940"],
+  },
+  {
+    value: "graphite",
+    colors: ["#20252b", "#59636e", "#e1e6eb", "#181b20", "#454d56"],
+  },
 ];
 
 const defaultResume = {
