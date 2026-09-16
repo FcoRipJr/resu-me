@@ -23,7 +23,7 @@ function App() {
       <header className="topbar">
         <div className="brand-wrap">
           <NavLink to="/" className="brand">
-            resu-me
+            Resu Me
           </NavLink>
         </div>
 
