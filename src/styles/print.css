@@ -59,15 +59,16 @@
     color: var(--resume-ink);
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
-    break-inside: avoid;
-    page-break-inside: avoid;
+    break-inside: auto;
+    page-break-inside: auto;
   }
 
   .resume-template.modern-template {
     display: grid;
     grid-template-columns: 38% 62%;
-    min-height: 0;
-    overflow: hidden;
+    min-height: 297mm;
+    height: auto;
+    overflow: visible;
   }
 
   .resume-template.additional-template {
