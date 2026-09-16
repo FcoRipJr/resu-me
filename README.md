@@ -23,6 +23,7 @@ The application runs entirely in the browser. It does not provide an AI backend:
 - A4 print layout and PDF export through the browser print dialog.
 - English as the default interface and resume language, with Portuguese and Spanish translations available.
 - Browser persistence for language, resume language, template, palette, date format, visual settings, and section settings.
+- Optional candidate JSON cookie storage, enabled only after explicit user consent.
 - Contact fields for email, phone, location, LinkedIn, GitHub, portfolio, and custom links.
 
 ## Technology Stack
@@ -78,10 +79,11 @@ The preview server runs at `http://localhost:4173`.
 ### 1. Build the candidate profile
 
 1. Open **Edit candidate**. This is the first step of the workflow.
-2. Fill in the form fields, or edit the candidate JSON directly.
-3. Use comma-separated fields for skills, languages, certifications, and additional links.
-4. Add experiences, experience skills, education, and projects as needed.
-5. Load an existing candidate JSON file, copy the JSON, download it, or clear all fields.
+2. Choose whether to authorize candidate JSON storage in browser cookies when the consent notice appears.
+3. Fill in the form fields, or edit the candidate JSON directly.
+4. Use comma-separated fields for skills, languages, certifications, and additional links.
+5. Add experiences, experience skills, education, and projects as needed.
+6. Load an existing candidate JSON file, copy the JSON, download it, or clear all fields.
 
 The form and JSON editor are bidirectional: changing a valid JSON value updates the corresponding form field, and changing a form field updates the JSON.
 
@@ -107,7 +109,7 @@ The form and JSON editor are bidirectional: changing a valid JSON value updates 
 8. Review the preview.
 9. Click **Print / Save as PDF** and select a PDF printer in the browser dialog.
 
-The interface language, resume language, selected template, palette, date format, visual settings, section order, hidden sections, and custom sections are stored in `localStorage` and restored on the next visit.
+The interface language, resume language, selected template, palette, date format, visual settings, section order, hidden sections, and custom sections are stored in `localStorage` and restored on the next visit. Candidate JSON is stored in browser cookies only after explicit consent. If consent is not granted, candidate data is not saved as a cookie.
 
 The visual editor includes a reset button. Changing the selected palette always restores that palette's default colors instead of carrying custom colors from the previous palette.
 

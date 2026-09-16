@@ -1,6 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Copy, Download, Eye, FileUp, Trash2 } from "lucide-react";
 import { validateCandidateJson } from "../utils/validation";
+import { getCookie, getJsonCookie, setJsonCookie } from "../utils/cookies";
+
+const COOKIE_CONSENT_KEY = "resu-me-cookie-consent";
+const CANDIDATE_COOKIE_KEY = "resu-me-candidate-json";
 
 const emptyCandidate = {
   candidate: {
@@ -119,15 +123,29 @@ const CommaListInput = ({ value, onChange, ...props }) => {
   );
 };
 
-const CandidateEditor = ({ t }) => {
-  const [candidate, setCandidate] = useState(emptyCandidate);
-  const [json, setJson] = useState(JSON.stringify(emptyCandidate, null, 2));
+const CandidateEditor = ({ t, cookieConsent }) => {
+  const storedCandidate =
+    getCookie(COOKIE_CONSENT_KEY) === "accepted"
+      ? getJsonCookie(CANDIDATE_COOKIE_KEY, null)
+      : null;
+  const initialCandidate = storedCandidate || emptyCandidate;
+  const [candidate, setCandidate] = useState(initialCandidate);
+  const [json, setJson] = useState(JSON.stringify(initialCandidate, null, 2));
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (cookieConsent === "accepted") {
+      setJsonCookie(CANDIDATE_COOKIE_KEY, candidate);
+    }
+  }, [cookieConsent]);
 
   const updateCandidate = (updater) => {
     setCandidate((current) => {
       const next = typeof updater === "function" ? updater(current) : updater;
       setJson(JSON.stringify(next, null, 2));
+      if (getCookie(COOKIE_CONSENT_KEY) === "accepted") {
+        setJsonCookie(CANDIDATE_COOKIE_KEY, next);
+      }
       setError("");
       return next;
     });
@@ -155,6 +173,9 @@ const CandidateEditor = ({ t }) => {
         return;
       }
       setCandidate(parsed);
+      if (getCookie(COOKIE_CONSENT_KEY) === "accepted") {
+        setJsonCookie(CANDIDATE_COOKIE_KEY, parsed);
+      }
       setError("");
     } catch {
       setError(t.candidateEditor.invalidJson);

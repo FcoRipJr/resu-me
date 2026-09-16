@@ -6,6 +6,13 @@ export const languageOptions = [
 
 export const translations = {
   "pt-BR": {
+    cookieConsent: {
+      title: "Uso de cookies",
+      description:
+        "Podemos salvar o JSON do candidato em cookies do navegador para reutilizá-lo na otimização. Esses dados só serão salvos após sua autorização.",
+      accept: "Autorizar e salvar dados",
+      reject: "Não autorizar",
+    },
     nav: {
       optimize: "Otimizar currículo",
       generate: "Gerar currículo",
@@ -180,6 +187,13 @@ export const translations = {
     },
   },
   en: {
+    cookieConsent: {
+      title: "Cookie consent",
+      description:
+        "We can save your candidate JSON in browser cookies to reuse it on the optimization page. This data is saved only after you authorize it.",
+      accept: "Authorize and save data",
+      reject: "Do not authorize",
+    },
     nav: {
       optimize: "Optimize resume",
       generate: "Generate resume",
@@ -353,6 +367,13 @@ export const translations = {
     },
   },
   es: {
+    cookieConsent: {
+      title: "Consentimiento de cookies",
+      description:
+        "Podemos guardar tu JSON de candidato en cookies del navegador para reutilizarlo en la página de optimización. Estos datos solo se guardarán después de tu autorización.",
+      accept: "Autorizar y guardar datos",
+      reject: "No autorizar",
+    },
     nav: {
       optimize: "Optimizar currículum",
       generate: "Generar currículum",

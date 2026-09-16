@@ -4,8 +4,11 @@ import { generatePrompt } from "../services/promptGenerator";
 import { languageOptions } from "../i18n/translations";
 import { getStoredPreference, setStoredPreference } from "../utils/storage";
 import { validateCandidateJson } from "../utils/validation";
+import { getCookie, getJsonCookie } from "../utils/cookies";
 
 const RESUME_LANGUAGE_KEY = "resu-me.resume-language";
+const CANDIDATE_COOKIE_KEY = "resu-me-candidate-json";
+const COOKIE_CONSENT_KEY = "resu-me-cookie-consent";
 const languageValues = languageOptions.map((option) => option.value);
 
 const exampleCandidate = {
@@ -72,8 +75,12 @@ const readJsonFile = (file) =>
   });
 
 const Optimize = ({ language, t }) => {
+  const storedCandidate =
+    getCookie(COOKIE_CONSENT_KEY) === "accepted"
+      ? getJsonCookie(CANDIDATE_COOKIE_KEY, null)
+      : null;
   const [candidateJson, setCandidateJson] = useState(
-    JSON.stringify(exampleCandidate, null, 2),
+    JSON.stringify(storedCandidate || exampleCandidate, null, 2),
   );
   const [jobText, setJobText] = useState("");
   const [jobUrl, setJobUrl] = useState("");
