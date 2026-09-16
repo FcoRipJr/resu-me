@@ -4,9 +4,15 @@ import Home from "./pages/Home";
 import Optimize from "./pages/Optimize";
 import Generate from "./pages/Generate";
 import { translations, languageOptions } from "./i18n/translations";
+import { getStoredPreference, setStoredPreference } from "./utils/storage";
+
+const APP_LANGUAGE_KEY = "resu-me.app-language";
+const languageValues = languageOptions.map((option) => option.value);
 
 function App() {
-  const [language, setLanguage] = useState("pt-BR");
+  const [language, setLanguage] = useState(() =>
+    getStoredPreference(APP_LANGUAGE_KEY, "pt-BR", languageValues),
+  );
   const t = useMemo(
     () => translations[language] || translations["pt-BR"],
     [language],
@@ -47,7 +53,11 @@ function App() {
           <select
             id="app-language"
             value={language}
-            onChange={(event) => setLanguage(event.target.value)}
+            onChange={(event) => {
+              const nextLanguage = event.target.value;
+              setLanguage(nextLanguage);
+              setStoredPreference(APP_LANGUAGE_KEY, nextLanguage);
+            }}
           >
             {languageOptions.map((option) => (
               <option key={option.value} value={option.value}>

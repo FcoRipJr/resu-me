@@ -1,6 +1,10 @@
 import { useMemo, useState } from "react";
 import { generatePrompt } from "../services/promptGenerator";
 import { languageOptions } from "../i18n/translations";
+import { getStoredPreference, setStoredPreference } from "../utils/storage";
+
+const RESUME_LANGUAGE_KEY = "resu-me.resume-language";
+const languageValues = languageOptions.map((option) => option.value);
 
 const exampleCandidate = {
   candidate: {
@@ -71,7 +75,13 @@ const Optimize = ({ language, t }) => {
   );
   const [jobText, setJobText] = useState("");
   const [jobUrl, setJobUrl] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState(language || "pt-BR");
+  const [selectedLanguage, setSelectedLanguage] = useState(() =>
+    getStoredPreference(
+      RESUME_LANGUAGE_KEY,
+      language || "pt-BR",
+      languageValues,
+    ),
+  );
   const [jobMode, setJobMode] = useState("text");
   const [error, setError] = useState("");
   const [prompt, setPrompt] = useState("");
@@ -216,7 +226,11 @@ const Optimize = ({ language, t }) => {
           <select
             id="language-select"
             value={selectedLanguage}
-            onChange={(event) => setSelectedLanguage(event.target.value)}
+            onChange={(event) => {
+              const nextLanguage = event.target.value;
+              setSelectedLanguage(nextLanguage);
+              setStoredPreference(RESUME_LANGUAGE_KEY, nextLanguage);
+            }}
           >
             {languageOptions.map((option) => (
               <option key={option.value} value={option.value}>

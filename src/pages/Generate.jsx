@@ -2,6 +2,10 @@ import { useMemo, useState } from "react";
 import AtsTemplate from "../templates/ats/AtsTemplate";
 import ModernTemplate from "../templates/modern/ModernTemplate";
 import ExecutiveTemplate from "../templates/executive/ExecutiveTemplate";
+import { getStoredPreference, setStoredPreference } from "../utils/storage";
+
+const TEMPLATE_KEY = "resu-me.resume-template";
+const PALETTE_KEY = "resu-me.resume-palette";
 
 const templateMap = {
   ats: AtsTemplate,
@@ -96,6 +100,9 @@ const paletteOptions = [
   },
 ];
 
+const templateValues = Object.keys(templateMap);
+const paletteValues = paletteOptions.map((option) => option.value);
+
 const defaultResume = {
   language: "pt-BR",
   candidate: {
@@ -167,8 +174,12 @@ const Generate = ({ t }) => {
   const [resumeJson, setResumeJson] = useState(
     JSON.stringify(defaultResume, null, 2),
   );
-  const [template, setTemplate] = useState("ats");
-  const [palette, setPalette] = useState("ocean");
+  const [template, setTemplate] = useState(() =>
+    getStoredPreference(TEMPLATE_KEY, "ats", templateValues),
+  );
+  const [palette, setPalette] = useState(() =>
+    getStoredPreference(PALETTE_KEY, "ocean", paletteValues),
+  );
   const [error, setError] = useState("");
 
   const resume = useMemo(() => {
@@ -219,7 +230,11 @@ const Generate = ({ t }) => {
           <select
             id="template-select"
             value={template}
-            onChange={(event) => setTemplate(event.target.value)}
+            onChange={(event) => {
+              const nextTemplate = event.target.value;
+              setTemplate(nextTemplate);
+              setStoredPreference(TEMPLATE_KEY, nextTemplate);
+            }}
           >
             <option value="ats">{t.generate.ats}</option>
             <option value="modern">{t.generate.modern}</option>
@@ -232,7 +247,11 @@ const Generate = ({ t }) => {
           <select
             id="palette-select"
             value={palette}
-            onChange={(event) => setPalette(event.target.value)}
+            onChange={(event) => {
+              const nextPalette = event.target.value;
+              setPalette(nextPalette);
+              setStoredPreference(PALETTE_KEY, nextPalette);
+            }}
           >
             {paletteOptions.map((option) => (
               <option key={option.value} value={option.value}>
