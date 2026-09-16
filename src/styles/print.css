@@ -61,6 +61,27 @@
     overflow: hidden;
   }
 
+  .resume-template.additional-template {
+    width: 100%;
+    max-width: 210mm;
+    min-height: 297mm;
+    border-radius: 0;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .resume-template.additional-template .resume-section,
+  .resume-template.additional-template .experience-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .resume-template.additional-split-executive .additional-body {
+    display: grid;
+    grid-template-columns: 38% 62%;
+    gap: calc(1.5rem * var(--resume-spacing-scale));
+  }
+
   .resume-template.modern-template .sidebar {
     background: var(--resume-dark);
     color: white;

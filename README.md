@@ -10,7 +10,7 @@ The application runs entirely in the browser. It does not provide an AI backend:
 - Job description input by text or URL.
 - Prompt generation for external AI tools.
 - Resume JSON input with file upload, example, copy, and clear actions.
-- ATS, Modern, and Executive resume templates.
+- 15 resume templates: ATS, Modern, Executive, Minimal, Creative, Academic, Split Executive, Editorial, Compact, Timeline, Monochrome, Geometric, Serif, Portfolio, and High Contrast.
 - 21 predefined color palettes.
 - A4 print layout and PDF export through the browser print dialog.
 - English as the default interface and resume language, with Portuguese and Spanish translations available.
@@ -81,7 +81,7 @@ The preview server runs at `http://localhost:4173`.
 
 1. Open **Generate resume**.
 2. Paste the optimized JSON or load a JSON file.
-3. Choose ATS, Modern, or Executive.
+3. Choose one of the 15 available templates.
 4. Choose a color palette.
 5. Review the preview.
 6. Click **Print / Save as PDF** and select a PDF printer in the browser dialog.

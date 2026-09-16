@@ -3,6 +3,7 @@ import { Copy, Eye, Plus, RotateCcw, Trash2, X } from "lucide-react";
 import AtsTemplate from "../templates/ats/AtsTemplate";
 import ModernTemplate from "../templates/modern/ModernTemplate";
 import ExecutiveTemplate from "../templates/executive/ExecutiveTemplate";
+import AdditionalTemplate from "../templates/additional/AdditionalTemplate";
 import {
   getStoredJsonPreference,
   getStoredPreference,
@@ -21,6 +22,22 @@ const templateMap = {
   ats: AtsTemplate,
   modern: ModernTemplate,
   executive: ExecutiveTemplate,
+  minimal: (props) => <AdditionalTemplate {...props} variant="minimal" />,
+  creative: (props) => <AdditionalTemplate {...props} variant="creative" />,
+  academic: (props) => <AdditionalTemplate {...props} variant="academic" />,
+  "split-executive": (props) => (
+    <AdditionalTemplate {...props} variant="split-executive" />
+  ),
+  editorial: (props) => <AdditionalTemplate {...props} variant="editorial" />,
+  compact: (props) => <AdditionalTemplate {...props} variant="compact" />,
+  timeline: (props) => <AdditionalTemplate {...props} variant="timeline" />,
+  monochrome: (props) => <AdditionalTemplate {...props} variant="monochrome" />,
+  geometric: (props) => <AdditionalTemplate {...props} variant="geometric" />,
+  serif: (props) => <AdditionalTemplate {...props} variant="serif" />,
+  portfolio: (props) => <AdditionalTemplate {...props} variant="portfolio" />,
+  "high-contrast": (props) => (
+    <AdditionalTemplate {...props} variant="high-contrast" />
+  ),
 };
 
 const paletteOptions = [
@@ -366,6 +383,18 @@ const Generate = ({ t }) => {
             <option value="ats">{t.generate.ats}</option>
             <option value="modern">{t.generate.modern}</option>
             <option value="executive">{t.generate.executive}</option>
+            <option value="minimal">{t.generate.minimal}</option>
+            <option value="creative">{t.generate.creative}</option>
+            <option value="academic">{t.generate.academic}</option>
+            <option value="split-executive">{t.generate.splitExecutive}</option>
+            <option value="editorial">{t.generate.editorial}</option>
+            <option value="compact">{t.generate.compact}</option>
+            <option value="timeline">{t.generate.timeline}</option>
+            <option value="monochrome">{t.generate.monochrome}</option>
+            <option value="geometric">{t.generate.geometric}</option>
+            <option value="serif">{t.generate.serif}</option>
+            <option value="portfolio">{t.generate.portfolio}</option>
+            <option value="high-contrast">{t.generate.highContrast}</option>
           </select>
         </div>
 
