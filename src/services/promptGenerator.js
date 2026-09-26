@@ -14,6 +14,7 @@ FUNDAMENTAL PRINCIPLE
 
 GENERAL RULES
 - Reorder content when necessary.
+- Always order both experiences and education chronologically: current items first, followed by non-current items in descending order by end date; when an end date is unavailable, use the start date for ordering.
 - Summarize descriptions and text for clarity.
 - Highlight technologies and skills relevant to the job opening.
 - Omit information that is not relevant.
@@ -40,7 +41,8 @@ ANALYSIS INSTRUCTIONS
 5. Rewrite the objective, summary, experiences, and skills to reflect the job without inventing facts.
 6. Keep all professional sections consistent with the original JSON.
 7. Omit information that is not relevant.
-8. The output must respect the requested language: ${language}.
+8. Before returning the JSON, order experiences and education with current items first, then sort the remaining items by end date descending, using start date when end date is unavailable.
+9. The output must respect the requested language: ${language}.
 
 REQUIRED OUTPUT FORMAT
 {
