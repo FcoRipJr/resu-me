@@ -8,6 +8,7 @@ const ModernTemplate = ({
   customSections = [],
   visualSettings = {},
   paletteColors = [],
+  sectionLabels = {},
 }) => {
   const candidate = resume?.candidate || {};
   const contact = candidate.contact || {};
@@ -45,7 +46,7 @@ const ModernTemplate = ({
         <p className="role">{candidate.title || "Desired role"}</p>
 
         <div className="sidebar-block">
-          <h3>Contact</h3>
+          <h3>{sectionLabels.contact || "Contact"}</h3>
           <ul>
             {contact.email && <li>{contact.email}</li>}
             {contact.phone && <li>{contact.phone}</li>}
@@ -64,7 +65,7 @@ const ModernTemplate = ({
             className="sidebar-block resume-section"
             style={sectionStyle("skills")}
           >
-            <h3>Skills</h3>
+            <h3>{sectionLabels.skills || "Skills"}</h3>
             <ul>
               {resume.skills.map((skill) => (
                 <li key={skill}>{skill}</li>
@@ -80,7 +81,7 @@ const ModernTemplate = ({
             className="resume-block resume-section"
             style={sectionStyle("objective")}
           >
-            <h2>Objective</h2>
+            <h2>{sectionLabels.objective || "Objective"}</h2>
             <p>{resume.objective}</p>
           </div>
         )}
@@ -90,7 +91,7 @@ const ModernTemplate = ({
             className="resume-block resume-section"
             style={sectionStyle("summary")}
           >
-            <h2>Summary</h2>
+            <h2>{sectionLabels.summary || "Summary"}</h2>
             <p>{resume.summary}</p>
           </div>
         )}
@@ -100,7 +101,7 @@ const ModernTemplate = ({
             className="resume-block resume-section"
             style={sectionStyle("experience")}
           >
-            <h2>Experience</h2>
+            <h2>{sectionLabels.experience || "Experience"}</h2>
             {resume.experiences.map((experience, index) => (
               <div
                 key={`${experience.company}-${index}`}
@@ -136,7 +137,7 @@ const ModernTemplate = ({
             className="resume-block resume-section"
             style={sectionStyle("education")}
           >
-            <h2>Education</h2>
+            <h2>{sectionLabels.education || "Education"}</h2>
             {resume.education.map((item, index) => (
               <div key={`${item.institution}-${index}`}>
                 <strong>{item.degree}</strong>
@@ -158,7 +159,7 @@ const ModernTemplate = ({
             className="resume-block resume-section"
             style={sectionStyle("projects")}
           >
-            <h2>Projects</h2>
+            <h2>{sectionLabels.projects || "Projects"}</h2>
             {resume.projects.map((project, index) => (
               <div key={`${project.name}-${index}`}>
                 <strong>{project.name}</strong>

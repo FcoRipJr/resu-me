@@ -4,6 +4,7 @@ import AtsTemplate from "../templates/ats/AtsTemplate";
 import ModernTemplate from "../templates/modern/ModernTemplate";
 import ExecutiveTemplate from "../templates/executive/ExecutiveTemplate";
 import AdditionalTemplate from "../templates/additional/AdditionalTemplate";
+import { translations } from "../i18n/translations";
 import {
   getStoredJsonPreference,
   getStoredPreference,
@@ -296,6 +297,8 @@ const Generate = ({ t }) => {
   }, [resumeJson]);
 
   const resume = parsedResume.resume;
+  const sectionLabels =
+    translations[resume?.language]?.generate?.sections || t.generate.sections;
 
   const updateVisualSetting = (key, value) => {
     setVisualSettings((current) => {
@@ -679,6 +682,7 @@ const Generate = ({ t }) => {
               sectionOrder={sectionOrder}
               hiddenSections={hiddenSections}
               customSections={customSections}
+              sectionLabels={sectionLabels}
             />
           </div>
         ) : (

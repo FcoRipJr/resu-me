@@ -18,6 +18,7 @@ const AdditionalTemplate = ({
   customSections = [],
   visualSettings = {},
   paletteColors = [],
+  sectionLabels = {},
 }) => {
   const candidate = resume?.candidate || {};
   const contact = candidate.contact || {};
@@ -40,7 +41,7 @@ const AdditionalTemplate = ({
           style={sectionStyle(sectionId)}
           key={sectionId}
         >
-          <h2>Objective</h2>
+          <h2>{sectionLabels.objective || "Objective"}</h2>
           <p>{resume.objective}</p>
         </section>
       );
@@ -52,7 +53,7 @@ const AdditionalTemplate = ({
           style={sectionStyle(sectionId)}
           key={sectionId}
         >
-          <h2>Summary</h2>
+          <h2>{sectionLabels.summary || "Summary"}</h2>
           <p>{resume.summary}</p>
         </section>
       );
@@ -64,7 +65,7 @@ const AdditionalTemplate = ({
           style={sectionStyle(sectionId)}
           key={sectionId}
         >
-          <h2>Skills</h2>
+          <h2>{sectionLabels.skills || "Skills"}</h2>
           <div className="chip-list">
             {resume.skills.map((skill) => (
               <span className="chip" key={skill}>
@@ -82,7 +83,7 @@ const AdditionalTemplate = ({
           style={sectionStyle(sectionId)}
           key={sectionId}
         >
-          <h2>Experience</h2>
+          <h2>{sectionLabels.experience || "Experience"}</h2>
           {resume.experiences.map((experience, index) => (
             <div
               className="experience-item"
@@ -115,7 +116,7 @@ const AdditionalTemplate = ({
           style={sectionStyle(sectionId)}
           key={sectionId}
         >
-          <h2>Education</h2>
+          <h2>{sectionLabels.education || "Education"}</h2>
           {resume.education.map((item, index) => (
             <div key={`${item.institution}-${index}`}>
               <strong>{item.degree}</strong>
@@ -142,7 +143,7 @@ const AdditionalTemplate = ({
           style={sectionStyle(sectionId)}
           key={sectionId}
         >
-          <h2>Projects</h2>
+          <h2>{sectionLabels.projects || "Projects"}</h2>
           {resume.projects.map((project, index) => (
             <div key={`${project.name}-${index}`}>
               <strong>{project.name}</strong>

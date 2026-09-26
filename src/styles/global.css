@@ -652,7 +652,7 @@ textarea {
   border-radius: 999px;
   background: var(--resume-accent-soft);
   color: var(--resume-accent);
-  font-size: 0.82rem;
+  font-size: calc(0.82rem * var(--resume-font-scale));
   font-weight: 600;
 }
 

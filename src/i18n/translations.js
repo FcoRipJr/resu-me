@@ -116,6 +116,7 @@ export const translations = {
       resetSectionOrder: "Restaurar ordem padrão",
       sectionEditor: "Editor de seções",
       sections: {
+        contact: "Contato",
         objective: "Objetivo",
         summary: "Resumo",
         skills: "Habilidades",
@@ -296,6 +297,7 @@ export const translations = {
       resetSectionOrder: "Reset default order",
       sectionEditor: "Section editor",
       sections: {
+        contact: "Contact",
         objective: "Objective",
         summary: "Summary",
         skills: "Skills",
@@ -477,6 +479,7 @@ export const translations = {
       resetSectionOrder: "Restaurar orden predeterminado",
       sectionEditor: "Editor de secciones",
       sections: {
+        contact: "Contacto",
         objective: "Objetivo",
         summary: "Resumen",
         skills: "Habilidades",

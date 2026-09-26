@@ -8,6 +8,7 @@ const AtsTemplate = ({
   customSections = [],
   visualSettings = {},
   paletteColors = [],
+  sectionLabels = {},
 }) => {
   const candidate = resume?.candidate || {};
   const contact = candidate.contact || {};
@@ -46,7 +47,7 @@ const AtsTemplate = ({
       </header>
 
       <section className="resume-block">
-        <h2>Contact</h2>
+        <h2>{sectionLabels.contact || "Contact"}</h2>
         <ul>
           {contact.email && <li>Email: {contact.email}</li>}
           {contact.phone && <li>Phone: {contact.phone}</li>}
@@ -65,7 +66,7 @@ const AtsTemplate = ({
           className="resume-block resume-section"
           style={sectionStyle("objective")}
         >
-          <h2>Objective</h2>
+          <h2>{sectionLabels.objective || "Objective"}</h2>
           <p>{resume.objective}</p>
         </section>
       )}
@@ -75,7 +76,7 @@ const AtsTemplate = ({
           className="resume-block resume-section"
           style={sectionStyle("summary")}
         >
-          <h2>Summary</h2>
+          <h2>{sectionLabels.summary || "Summary"}</h2>
           <p>{resume.summary}</p>
         </section>
       )}
@@ -85,7 +86,7 @@ const AtsTemplate = ({
           className="resume-block resume-section"
           style={sectionStyle("skills")}
         >
-          <h2>Skills</h2>
+          <h2>{sectionLabels.skills || "Skills"}</h2>
           <div className="chip-list">
             {resume.skills.map((skill) => (
               <span key={skill} className="chip">
@@ -101,7 +102,7 @@ const AtsTemplate = ({
           className="resume-block resume-section"
           style={sectionStyle("experience")}
         >
-          <h2>Experience</h2>
+          <h2>{sectionLabels.experience || "Experience"}</h2>
           {resume.experiences.map((experience, index) => (
             <div
               key={`${experience.company}-${index}`}
@@ -137,7 +138,7 @@ const AtsTemplate = ({
           className="resume-block resume-section"
           style={sectionStyle("education")}
         >
-          <h2>Education</h2>
+          <h2>{sectionLabels.education || "Education"}</h2>
           {resume.education.map((item, index) => (
             <div key={`${item.institution}-${index}`}>
               <strong>{item.degree}</strong>
@@ -160,7 +161,7 @@ const AtsTemplate = ({
           className="resume-block resume-section"
           style={sectionStyle("projects")}
         >
-          <h2>Projects</h2>
+          <h2>{sectionLabels.projects || "Projects"}</h2>
           {resume.projects.map((project, index) => (
             <div key={`${project.name}-${index}`}>
               <strong>{project.name}</strong>
