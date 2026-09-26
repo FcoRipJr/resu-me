@@ -65,7 +65,7 @@ const ExecutiveTemplate = ({
           style={sectionStyle("objective")}
         >
           <h2>{sectionLabels.objective || "Objective"}</h2>
-          <p>{resume.objective}</p>
+          <p className="resume-copy">{resume.objective}</p>
         </section>
       )}
 
@@ -75,7 +75,7 @@ const ExecutiveTemplate = ({
           style={sectionStyle("summary")}
         >
           <h2>{sectionLabels.summary || "Summary"}</h2>
-          <p>{resume.summary}</p>
+          <p className="resume-copy">{resume.summary}</p>
         </section>
       )}
 
@@ -109,23 +109,25 @@ const ExecutiveTemplate = ({
               <div className="experience-header">
                 <strong>{experience.position}</strong>
               </div>
-              {experience.company && (
-                <div className="experience-company">{experience.company}</div>
-              )}
-              {experience.start || experience.end || experience.current ? (
-                <p className="experience-period">
-                  {formatPeriod(
-                    experience.start,
-                    experience.end,
-                    experience.current,
-                    {
-                      locale: resume.language || "en",
-                      format: dateFormat,
-                    },
-                  )}
-                </p>
-              ) : null}
-              <p>{experience.description}</p>
+              <div className="resume-meta-row">
+                {experience.start || experience.end || experience.current ? (
+                  <p className="experience-period">
+                    {formatPeriod(
+                      experience.start,
+                      experience.end,
+                      experience.current,
+                      {
+                        locale: resume.language || "en",
+                        format: dateFormat,
+                      },
+                    )}
+                  </p>
+                ) : null}
+                {experience.company && (
+                  <div className="experience-company">{experience.company}</div>
+                )}
+              </div>
+              <p className="resume-copy">{experience.description}</p>
             </div>
           ))}
         </section>
@@ -140,15 +142,17 @@ const ExecutiveTemplate = ({
           {resume.education.map((item, index) => (
             <div key={`${item.institution}-${index}`}>
               <strong>{item.degree}</strong>
-              <p>{item.institution}</p>
-              {(item.start || item.end) && (
-                <p className="experience-period">
-                  {formatPeriod(item.start, item.end, item.current, {
-                    locale: resume.language || "en",
-                    format: dateFormat,
-                  })}
-                </p>
-              )}
+              <div className="resume-meta-row">
+                {(item.start || item.end) && (
+                  <p className="experience-period">
+                    {formatPeriod(item.start, item.end, item.current, {
+                      locale: resume.language || "en",
+                      format: dateFormat,
+                    })}
+                  </p>
+                )}
+                <div className="experience-company">{item.institution}</div>
+              </div>
             </div>
           ))}
         </section>
@@ -162,7 +166,7 @@ const ExecutiveTemplate = ({
           {resume.projects.map((project, index) => (
             <div key={`${project.name}-${index}`}>
               <strong>{project.name}</strong>
-              <p>{project.description}</p>
+              <p className="resume-copy">{project.description}</p>
             </div>
           ))}
         </section>

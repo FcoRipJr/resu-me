@@ -48,7 +48,7 @@ const AtsTemplate = ({
 
       <section className="resume-block">
         <h2>{sectionLabels.contact || "Contact"}</h2>
-        <ul>
+        <ul className="contact-list">
           {contact.email && <li>Email: {contact.email}</li>}
           {contact.phone && <li>Phone: {contact.phone}</li>}
           {contact.location && <li>Location: {contact.location}</li>}
@@ -67,7 +67,7 @@ const AtsTemplate = ({
           style={sectionStyle("objective")}
         >
           <h2>{sectionLabels.objective || "Objective"}</h2>
-          <p>{resume.objective}</p>
+          <p className="resume-copy">{resume.objective}</p>
         </section>
       )}
 
@@ -77,7 +77,7 @@ const AtsTemplate = ({
           style={sectionStyle("summary")}
         >
           <h2>{sectionLabels.summary || "Summary"}</h2>
-          <p>{resume.summary}</p>
+          <p className="resume-copy">{resume.summary}</p>
         </section>
       )}
 
@@ -111,23 +111,27 @@ const AtsTemplate = ({
               <div className="experience-header">
                 <strong>{experience.position}</strong>
               </div>
-              {experience.company && (
-                <div className="experience-company">{experience.company}</div>
+              <div className="resume-meta-row">
+                {experience.start || experience.end || experience.current ? (
+                  <p className="experience-period">
+                    {formatPeriod(
+                      experience.start,
+                      experience.end,
+                      experience.current,
+                      {
+                        locale: resume.language || "en",
+                        format: dateFormat,
+                      },
+                    )}
+                  </p>
+                ) : null}
+                {experience.company && (
+                  <div className="experience-company">{experience.company}</div>
+                )}
+              </div>
+              {experience.description && (
+                <p className="resume-copy">{experience.description}</p>
               )}
-              {experience.start || experience.end || experience.current ? (
-                <p className="experience-period">
-                  {formatPeriod(
-                    experience.start,
-                    experience.end,
-                    experience.current,
-                    {
-                      locale: resume.language || "en",
-                      format: dateFormat,
-                    },
-                  )}
-                </p>
-              ) : null}
-              {experience.description && <p>{experience.description}</p>}
             </div>
           ))}
         </section>
@@ -142,15 +146,17 @@ const AtsTemplate = ({
           {resume.education.map((item, index) => (
             <div key={`${item.institution}-${index}`}>
               <strong>{item.degree}</strong>
-              <p>{item.institution}</p>
-              {(item.start || item.end) && (
-                <p className="experience-period">
-                  {formatPeriod(item.start, item.end, item.current, {
-                    locale: resume.language || "en",
-                    format: dateFormat,
-                  })}
-                </p>
-              )}
+              <div className="resume-meta-row">
+                {(item.start || item.end) && (
+                  <p className="experience-period">
+                    {formatPeriod(item.start, item.end, item.current, {
+                      locale: resume.language || "en",
+                      format: dateFormat,
+                    })}
+                  </p>
+                )}
+                <div className="experience-company">{item.institution}</div>
+              </div>
             </div>
           ))}
         </section>
@@ -165,7 +171,7 @@ const AtsTemplate = ({
           {resume.projects.map((project, index) => (
             <div key={`${project.name}-${index}`}>
               <strong>{project.name}</strong>
-              <p>{project.description}</p>
+              <p className="resume-copy">{project.description}</p>
             </div>
           ))}
         </section>
