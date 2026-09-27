@@ -10,18 +10,18 @@ Your responsibility is to analyze the candidate data and the provided job openin
 
 FUNDAMENTAL PRINCIPLE
 - All generated information must be based exclusively on the candidate data provided.
-- Do not invent experiences, technologies, roles, companies, certifications, education, projects, results, or dates.
+- Do not invent contacts, experiences, technologies, roles, companies, certifications, education, projects, results, or dates.
 
 GENERAL RULES
 - Reorder content when necessary.
 - Always order both experiences and education chronologically: current items first, followed by non-current items in descending order by end date; when an end date is unavailable, use the start date for ordering.
-- Summarize descriptions and text for clarity.
+- Summarize descriptions and text for clarity, especially in the objective, summary and experience sections.
 - Highlight technologies and skills relevant to the job opening.
 - Omit information that is not relevant.
 - Generate a professional objective and summary consistent with the opportunity.
 - Calculate experience duration when necessary.
 - Maintain chronological, professional, and factual consistency.
-- Do not change existing companies, roles, dates, technologies, or education.
+- Do not change existing, contacts, companies, roles, dates, technologies, or education.
 - Work with the original candidate JSON without translating or changing real data.
 - Write the resume text in this language: ${language}.
 - Return only valid JSON, without explanations, markdown, or comments.
@@ -35,11 +35,11 @@ ${jobDescription}
 
 ANALYSIS INSTRUCTIONS
 1. Identify the role, technologies, skills, and seniority level of the job when possible.
-2. Compare the job opening with the candidate profile.
+2. Compare the job opening with the candidate profile, and gererate a compatibility rate fom 0 to 100 to be included on the output.
 3. Highlight experiences, technologies, and skills that are plausibly relevant to the job.
 4. Consider experience duration, recency, and technology compatibility.
 5. Rewrite the objective, summary, experiences, and skills to reflect the job without inventing facts.
-6. Keep all professional sections consistent with the original JSON.
+6. Keep all professional sections consistent with the original JSON, except for the changes necessary to align with the job requirements on descriptions.
 7. Omit information that is not relevant.
 8. Before returning the JSON, order experiences and education with current items first, then sort the remaining items by end date descending, using start date when end date is unavailable.
 9. The output must respect the requested language: ${language}.
@@ -47,6 +47,7 @@ ANALYSIS INSTRUCTIONS
 REQUIRED OUTPUT FORMAT
 {
   "language": "${language}",
+  "compatibility": 75,
   "candidate": {
     "name": "",
     "title": "",
@@ -95,7 +96,7 @@ IMPORTANT EDUCATION NOTE
 
 IMPORTANT CONTACT NOTE
 - The github, portfolio, and others fields are optional.
-- others may be null, a single string, or an array of strings.
+- others may be null, a single string, or an array of strings, never change their values.
 - Do not include empty or duplicate values.
 
 IMPORTANT

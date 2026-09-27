@@ -143,6 +143,7 @@ const defaultVisualSettings = { fontScale: 1, spacing: 1, margin: 1 };
 
 const defaultResume = {
   language: "en",
+  compatibility: 75,
   candidate: {
     name: "Maria Souza",
     title: "Front-end Developer",
