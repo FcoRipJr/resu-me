@@ -9,6 +9,7 @@ const AtsTemplate = ({
   visualSettings = {},
   paletteColors = [],
   sectionLabels = {},
+  contactLabels = {},
 }) => {
   const candidate = resume?.candidate || {};
   const contact = candidate.contact || {};
@@ -49,12 +50,36 @@ const AtsTemplate = ({
       <section className="resume-block">
         <h2>{sectionLabels.contact || "Contact"}</h2>
         <ul className="contact-list">
-          {contact.email && <li>Email: {contact.email}</li>}
-          {contact.phone && <li>Phone: {contact.phone}</li>}
-          {contact.location && <li>Location: {contact.location}</li>}
-          {contact.linkedin && <li>LinkedIn: {contact.linkedin}</li>}
-          {contact.github && <li>GitHub: {contact.github}</li>}
-          {contact.portfolio && <li>Portfolio: {contact.portfolio}</li>}
+          {contact.email && (
+            <li>
+              {contactLabels.email || "Email"}: {contact.email}
+            </li>
+          )}
+          {contact.phone && (
+            <li>
+              {contactLabels.phone || "Phone"}: {contact.phone}
+            </li>
+          )}
+          {contact.location && (
+            <li>
+              {contactLabels.location || "Location"}: {contact.location}
+            </li>
+          )}
+          {contact.linkedin && (
+            <li>
+              {contactLabels.linkedin || "LinkedIn"}: {contact.linkedin}
+            </li>
+          )}
+          {contact.github && (
+            <li>
+              {contactLabels.github || "GitHub"}: {contact.github}
+            </li>
+          )}
+          {contact.portfolio && (
+            <li>
+              {contactLabels.portfolio || "Portfolio"}: {contact.portfolio}
+            </li>
+          )}
           {others.map((item, index) => (
             <li key={`${item}-${index}`}>{item}</li>
           ))}

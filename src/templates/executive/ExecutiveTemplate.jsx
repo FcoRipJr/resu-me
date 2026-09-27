@@ -9,6 +9,7 @@ const ExecutiveTemplate = ({
   visualSettings = {},
   paletteColors = [],
   sectionLabels = {},
+  contactLabels = {},
 }) => {
   const candidate = resume?.candidate || {};
   const contact = candidate.contact || {};
@@ -51,8 +52,16 @@ const ExecutiveTemplate = ({
           {contact.phone && <span>{contact.phone}</span>}
           {contact.location && <span>{contact.location}</span>}
           {contact.linkedin && <span>{contact.linkedin}</span>}
-          {contact.github && <span>GitHub: {contact.github}</span>}
-          {contact.portfolio && <span>Portfolio: {contact.portfolio}</span>}
+          {contact.github && (
+            <span>
+              {contactLabels.github || "GitHub"}: {contact.github}
+            </span>
+          )}
+          {contact.portfolio && (
+            <span>
+              {contactLabels.portfolio || "Portfolio"}: {contact.portfolio}
+            </span>
+          )}
           {others.map((item, index) => (
             <span key={`${item}-${index}`}>{item}</span>
           ))}

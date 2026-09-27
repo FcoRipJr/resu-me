@@ -9,6 +9,7 @@ const ModernTemplate = ({
   visualSettings = {},
   paletteColors = [],
   sectionLabels = {},
+  contactLabels = {},
 }) => {
   const candidate = resume?.candidate || {};
   const contact = candidate.contact || {};
@@ -52,8 +53,16 @@ const ModernTemplate = ({
             {contact.phone && <li>{contact.phone}</li>}
             {contact.location && <li>{contact.location}</li>}
             {contact.linkedin && <li>{contact.linkedin}</li>}
-            {contact.github && <li>GitHub: {contact.github}</li>}
-            {contact.portfolio && <li>Portfolio: {contact.portfolio}</li>}
+            {contact.github && (
+              <li>
+                {contactLabels.github || "GitHub"}: {contact.github}
+              </li>
+            )}
+            {contact.portfolio && (
+              <li>
+                {contactLabels.portfolio || "Portfolio"}: {contact.portfolio}
+              </li>
+            )}
             {others.map((item, index) => (
               <li key={`${item}-${index}`}>{item}</li>
             ))}

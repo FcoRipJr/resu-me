@@ -300,6 +300,8 @@ const Generate = ({ t }) => {
   const resume = parsedResume.resume;
   const sectionLabels =
     translations[resume?.language]?.generate?.sections || t.generate.sections;
+  const contactLabels =
+    translations[resume?.language]?.candidateEditor || t.candidateEditor;
 
   const updateVisualSetting = (key, value) => {
     setVisualSettings((current) => {
@@ -684,6 +686,7 @@ const Generate = ({ t }) => {
               hiddenSections={hiddenSections}
               customSections={customSections}
               sectionLabels={sectionLabels}
+              contactLabels={contactLabels}
             />
           </div>
         ) : (
